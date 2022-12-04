@@ -1,0 +1,60 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+a{
+	font-size:2rem;
+	color: white;
+	background-color: #23334b;
+	border-radius: 6px;
+	padding: 1.5rem;
+	box-shadow: -2px 2px 8px 0px #0f0f0f;
+	width: 15rem;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 100vh
+}
+
+body{
+	background-color: #10181E;
+	color: white;
+}
+
+h1{
+	font-size: 4rem
+}
+
+h1, h2{
+	text-align: center 
+}
+
+.note-form {
+  max-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+  margin: auto;
+  padding: 1rem;
+  background-color: #23334b;
+  border-radius: 6px;
+  box-shadow: -2px 2px 8px 0px #0f0f0f;
+  border-top: 1px solid;
+  border-right: 1px solid;
+  border-color:#117ca049;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+}

@@ -1,0 +1,37 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+a{
+	font-size:2rem;
+	color: white;
+	background-color: #23334b;
+	border-radius: 6px;
+	padding: 1.5rem;
+	box-shadow: -2px 2px 8px 0px #0f0f0f;
+	width: 15rem;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 100vh
+}
+
+body{
+	background-color: #10181E;
+	color: white;
+}
+
+h1{
+	font-size: 4rem
+}
+
+h1, h2{
+	text-align: center 
+}
