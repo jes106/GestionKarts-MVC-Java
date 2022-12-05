@@ -69,7 +69,7 @@ public class UsuarioDAO {
 			Connection connection = dbConnection.getConnection();
 			
 			Properties cons = new Properties();
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
