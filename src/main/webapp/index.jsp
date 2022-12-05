@@ -46,7 +46,7 @@
 		<p>Se registró el día (aquí pondrá la fecha)<%-- <%out.println(formattedRegisterDate); %> --%></p>
 		
 		<a href="/Práctica3/mvc/controllers/DisconnectController.jsp">Desconectar</a>
-		<a href="/Práctica3/mvc/views/ModifyClienteView.jsp">Modificar Datos</a>
+		<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 	</div>
 	
 	<%-- <%
