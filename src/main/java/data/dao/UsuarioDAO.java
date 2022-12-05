@@ -37,14 +37,15 @@ public class UsuarioDAO {
 	    Connection connection = dbConnection.getConnection();
 	    
 	    Properties cons = new Properties();
-	    cons.load(new FileReader("./src/main/java/Consultas.properties"));
+	    cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	    
 	    PreparedStatement ps = connection.prepareStatement(cons.getProperty("InsertUser"));
 	    ps.setString(1, user.getNameSurname());
 	    ps.setTimestamp(2, user.getBirthDate());
 	    ps.setTimestamp(3,  user.getInscriptionDate());
 	    ps.setString(4, user.getEmail());
-	    ps.setString(5, user.getRol());
+	    ps.setString(5, user.getPassword());
+	    ps.setString(6, user.getRol());
 	    
 	    // Lo alamcenamos en la base de datos
 	    ps.executeUpdate();
@@ -55,6 +56,7 @@ public class UsuarioDAO {
     else {
     	return false;
     }
+
   }
 
   /**

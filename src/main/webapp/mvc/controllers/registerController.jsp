@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<jsp:useBean  id="User" scope="session" class="display.javabean.NewCustomerBean"></jsp:useBean>
+<jsp:useBean  id="User" scope="session" class="display.javabean.CustomerBean"></jsp:useBean>
 <%@ page import="business.UsuarioDTO" %>
 <%@ page import="data.common.SystemManager" %>
 <%@ page import="java.sql.Timestamp" %>
@@ -30,22 +30,22 @@
 		int year = Integer.parseInt(Syear);
 		
 		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 		String rol = request.getParameter("rol");
 	
 		String date = day + "-" + month + "-" + year + " " + 00 + ":" + 00 + ":" + 00;		
 	
 		
-		if(UsuarioDAO.altaUsuario(new UsuarioDTO(name, SystemManager.StringToDateSQL(date), email, rol)) == true) {
+		if(UsuarioDAO.altaUsuario(new UsuarioDTO(name, password, SystemManager.StringToDateSQL(date), email, rol)) == true) {
 			nextPage = "../../index.jsp";
 			nextPageMessage = "";
+		}
 		
-
-		} else if(email != null) { 
+		else if(email != null) { 
 			nextPageMessage = "error";
-	%>
-	
-	<%
-		} else {
+		}
+		
+		else {
 	%>
 	<jsp:setProperty property="email" value="" name="User"/>
 	<%

@@ -43,6 +43,11 @@
 		</div>
 		<br/>
 		<div class="field">
+		<label for="password">Contraseña: </label>
+		<input type="password" name="password" value="">	
+		</div>
+		<br/>
+		<div class="field">
 		<label for="rol">Rol: </label>
 		<input type="text" name="rol" value="">
 		</div>
