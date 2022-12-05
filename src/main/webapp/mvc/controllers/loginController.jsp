@@ -14,16 +14,16 @@
 		String nextPage = "../views/LoginView.jsp";
 		String nextPageMessage = null;
 		
-		String email = request.getParameter("email");
-		String rol = request.getParameter("rol");
+		String mail = request.getParameter("email");
 	
-		if(UsuarioDAO.comprobarEsxistenciaUsuario(email) == true) {
+		if(UsuarioDAO.comprobarEsxistenciaUsuario(mail) == true) {
 			nextPage = "../../index.jsp";
 			nextPageMessage = "";
 	%>
-	<jsp:setProperty property="mail" value="<%=email	%>" name="User"/>
+	<!-- si descomentamos esto no funciona, creo que es porque el bean no funciona -->
+	<%-- <jsp:setProperty property="mail" value="<%=mail%>" name="User"/> --%>
 	<%
-		} else if(email != null) { 
+		} else if(mail != null) { 
 			nextPageMessage = "error";
 	%>
 	
@@ -37,7 +37,7 @@
 </body>
 </html>
 <%
-	if(email != null) {
+	if(mail != null) {
 %>
 <jsp:forward page="<%=nextPage%>">
 	    <jsp:param name="error" value="<%=nextPageMessage%>"/>
