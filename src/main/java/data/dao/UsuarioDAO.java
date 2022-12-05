@@ -99,6 +99,44 @@ public class UsuarioDAO {
 		return ret;
   }
   
+  
+  public static boolean comprobarPassword(String email, String password) throws SQLException{
+	  boolean ret = false;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			
+			Properties cons = new Properties();
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		
+			Statement stmt = null;
+			try {
+				stmt = connection.createStatement();
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			ResultSet rs = null;
+			
+			try {
+				rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckPassword") + "'" + email + "'");
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			rs.next();
+//			System.out.println("contraseña: " + rs.getString(1));
+			if(rs.getString(1).contentEquals(password)) { ret = true; }
+				
+				if(stmt != null) { 
+					try {
+						stmt.close();
+					} catch (SQLException e) { e.printStackTrace(); } 
+				}
+				
+				dbConnection.closeConnection();
+			
+		} catch (FileNotFoundException e) {	e.printStackTrace(); } 
+		  catch (IOException e) { e.printStackTrace(); }
+		return ret;
+}
+  
   public static UsuarioDTO getUser(String email) {
 	  DBConnection dbConnection = new DBConnection();
 	  Connection connection = null;

@@ -19,8 +19,13 @@
 
 	
 		if(UsuarioDAO.comprobarEsxistenciaUsuario(mail) == true) {
-			nextPage = "../../index.jsp";
-			nextPageMessage = "";
+			if(UsuarioDAO.comprobarPassword(mail, password) == true) {
+				nextPage = "../../index.jsp";
+				nextPageMessage = "";
+			}
+			/* else {
+				System.out.println("contraseña incorrecta!");
+			} */
 	%>
 	<!-- si descomentamos esto no funciona, creo que es porque el bean no funciona -->
 	<%-- <jsp:setProperty property="mail" value="<%=mail%>" name="User"/> --%>
