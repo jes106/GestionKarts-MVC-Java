@@ -22,6 +22,11 @@
 		<input type="text" name="email" value="">
 		</div>	
 		<br />
+		<div class="field">
+		<label for="password">Contraseña: </label>
+		<input type="password" name="password" value="">
+		</div>	
+		<br />
 		<input type="submit" value="Acceder">
 	</form>
 	</div>

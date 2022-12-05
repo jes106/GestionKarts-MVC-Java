@@ -15,6 +15,8 @@
 		String nextPageMessage = null;
 		
 		String mail = request.getParameter("email");
+		String password = request.getParameter("password");
+
 	
 		if(UsuarioDAO.comprobarEsxistenciaUsuario(mail) == true) {
 			nextPage = "../../index.jsp";
