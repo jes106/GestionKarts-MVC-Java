@@ -52,8 +52,6 @@
   		</tr>
 		
 		<%} %>
-		<a href="mvc/controllers/disconnectController.jsp">Desconectar</a>
-		<a href="mvc/views/SearchByEmailView.jsp">Modificar Datos</a>
 	</div>
 	<% }
 	else if(usuario.getRol().equals("Cliente")){
@@ -66,13 +64,18 @@
 		<p>Su antigüedad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %></p>
 		<p>Su próxima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
 		
-		<a href="mvc/controllers/disconnectController.jsp">Desconectar</a>
-		<a href="mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
+		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 	</div>
 	
 	<%
 	}
-	usuario=null;
+	else{
+		%>
+		<a href="/Práctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/views/SearchByEmailView.jsp">Modificar Datos</a>
+	<%
+	}
 	%>
 	
 </body>

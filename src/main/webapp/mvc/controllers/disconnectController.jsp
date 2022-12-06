@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <jsp:useBean id="usuario" class="display.javabean.CustomerBean" scope="session"/>
+<%@ page import="java.util.concurrent.TimeUnit" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +12,11 @@
 <body>
 
 <%
-String nextPage = "../../index.jsp"; %>
-usuario.setUsuario("");
-usuario.setRol("");
-<h1>El usuario ha sido desconectado</h1>
-
+String nextPage = "../../index.jsp"; 
+usuario.setUsuario(null);
+usuario.setRol(null);
+%>
 	
-	<jsp:forward page="<%=nextPage%>" />
+<jsp:forward page="<%=nextPage%>" />
 </body>
 </html>
