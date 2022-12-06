@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.time.LocalDateTime" %>
+<jsp:useBean id="usuario" class="display.javabean.CustomerBean" scope="session"/>
+<%@ page import="data.dao.UsuarioDAO" %>
+<%@ page import="business.UsuarioDTO" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <!DOCTYPE html>
 <html>
@@ -10,63 +14,66 @@
 <link href="/Práctica3/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	
-	<!-- AQUI NECESITAMOS QUE FUNCIONE EL JAVA BEAM -->
-	<!-- para diferenciar si el usuario es cliente o administrador o no ha iniciado sesion  --> -->
-	
-	
-	<!--Aqui tenemos que comprobar si no ha iniciado sesion. -->
-	<!-- entonces se le muestra la pagina de inicio 	-->
-	<%-- <%
-		String error = (String)request.getParameter("error");
-		if(request.getParameter("disconnect") != null) {
-	%>
-	<jsp:setProperty property="mail" value="" name="User"/>
-	<%
-		}
-		if(User.getMail() == "" || User.getMail() == null) {
-	%> --%>
 
-	<div class="container">
+	
+	<% 
+	String nextPage="";
+	if(usuario.getUsuario() == null){ 
+	%>
+	
+		<div class="container">
 		<h1>Aplicacion de Karts</h1>
 		<h2>acceder al sistema</h2>
 		<a href="/Práctica3/mvc/views/LoginView.jsp">Acceder</a>
 		<a href="/Práctica3/mvc/views/RegisterView.jsp">Registrarse</a>
 	</div>
 	
-	<!-- Aqui tenemos que comprobar es cliente. -->
-	<!-- entonces se le muestra la pagina de cliente -->
-	<%-- <% else if(user.getRol() == "Cliente") { %> --%>
-	
-	<div class="container">
-		<h1>Cuando el JavaBeam funcione esto solo se le mostrara si está logueado como "Cliente"</h1>
-		<p>¡Bienvenido (aquí pondrá el nombre)<%-- <%out.println(user.getNameSurname()); %> --%>!</p>
-		
-		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
-		<p>Se registró el día (aquí pondrá la fecha)<%-- <%out.println(formattedRegisterDate); %> --%></p>
-		
-		<a href="/Práctica3/mvc/controllers/DisconnectController.jsp">Desconectar</a>
-		<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
-	</div>
-	
-	<%-- <%
-	} 
-	else if(user.getRole() == "Administrador") { 
-	%> --%>
-	
-	<div class="container">
-		<h1>Cuando el JavaBeam funcione esto solo se le mostrara si está logueado como "Administrador"</h1>
-		<p>¡Bienvenido (aquí pondrá el nombre)<%-- <%out.println(user.getNameSurname()); %> --%>!</p>
+	<% }
+	else if(usuario.getRol().equals("Administrador")) { 
+	%>
+		<div class="container">
+		<h1>Estás logueado como: "Administrador"</h1>
+		<p>¡Bienvenido <%out.println(usuario.getUsuario()); %></p>
 		
 		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
 		<h2>Listado de clientes:</h2>
+		<table class="default">
+  		<tr>
+  			<th>Nombre</th>
+    		<th>Antigüedad</th>
+    		<th>Número de reservas</th>
+ 		</tr>
+		<% ArrayList<UsuarioDTO> users = UsuarioDAO.listarUsuarios(); 
+		for(int i=0;i<users.size();i++){%>
+		  <tr>
+    		<td><%out.println(users.get(i).getNameSurname()); %></td>
+    		<td><%out.println(UsuarioDAO.calcularAntiguedad(users.get(i).getEmail())); %></td>
+    		<td><%out.println(UsuarioDAO.getNReservas(users.get(i).getEmail())); %></td>
+  		</tr>
 		
-		<a href="/Práctica3/mvc/controllers/DisconnectController.jsp">Desconectar</a>
-		<a href="/Práctica3/mvc/views/SearchByEmailView.jsp">Modificar Datos</a>
+		<%} %>
+		<a href="mvc/controllers/disconnectController.jsp">Desconectar</a>
+		<a href="mvc/views/SearchByEmailView.jsp">Modificar Datos</a>
+	</div>
+	<% }
+	else if(usuario.getRol().equals("Cliente")){
+	%>
+	
+		<div class="container">
+		<p>¡Bienvenido <%out.println(usuario.getUsuario()); %>!</p>
+	
+		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
+		<p>Su antigüedad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %></p>
+		<p>Su próxima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
+		
+		<a href="mvc/controllers/disconnectController.jsp">Desconectar</a>
+		<a href="mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 	</div>
 	
-	<%-- <%
-	} 
-	%> --%>
+	<%
+	}
+	usuario=null;
+	%>
+	
 </body>
 </html>

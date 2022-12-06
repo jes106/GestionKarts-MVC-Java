@@ -59,6 +59,51 @@ public class UsuarioDAO {
 
   }
 
+  public static String getRole(String email) {
+	  String ret = null;
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			
+			Properties cons = new Properties();
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		
+			Statement stmt = null;
+			try {
+				stmt = connection.createStatement();
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			ResultSet rs = null;
+			
+			try {
+				rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckRole") + "'" + email + "'");
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			try {
+				rs.next();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				ret=rs.getString(1);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+				
+				if(stmt != null) { 
+					try {
+						stmt.close();
+					} catch (SQLException e) { e.printStackTrace(); } 
+				}
+				
+				dbConnection.closeConnection();
+			
+		} catch (FileNotFoundException e) {	e.printStackTrace(); } 
+		  catch (IOException e) { e.printStackTrace(); }
+		return ret;
+
+  }
+  
   /**
    * probes by email that the user is in the system
    * @return true if the user exists
@@ -278,8 +323,8 @@ public class UsuarioDAO {
  * @throws IOException 
  * @throws FileNotFoundException 
    */
-  public static ArrayList<String> listarUsuarios(){
-	  	ArrayList<String> users = new ArrayList<String>();
+  public static ArrayList<UsuarioDTO> listarUsuarios(){
+	  	ArrayList<UsuarioDTO> users = new ArrayList<UsuarioDTO>();
 	  
 	  	DBConnection dbConnection = new DBConnection();
 	  	Connection connection = null;
@@ -291,7 +336,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 	  
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	  
 		Statement stmt = null;
@@ -305,7 +350,7 @@ public class UsuarioDAO {
 		try {
 			rs = (ResultSet) stmt.executeQuery(cons.getProperty("InfoAllUsers"));
 		} catch (SQLException e) { e.printStackTrace(); }
-	  
+	  if(rs!=null) {
 		try {
 			while(rs.next()) {
 				UsuarioDTO usu = null;
@@ -315,9 +360,10 @@ public class UsuarioDAO {
 					usu.setInscription(rs.getTimestamp("InscriptionD"));
 				} catch (SQLException e) { e.printStackTrace(); }
 
-			  users.add(usu.toString());
+			  users.add(usu);
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
+  }
 	  dbConnection.closeConnection();
 	  return users;
   }
@@ -342,7 +388,7 @@ public static int calcularAntiguedad(String mail){
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
@@ -370,4 +416,90 @@ public static int calcularAntiguedad(String mail){
 	  
 	  return -1;
    }
+
+
+public static String getNReservas(String email) {
+	String retorno="";
+	
+	try {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		
+		Properties cons = new Properties();
+		cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+	
+		Statement stmt = null;
+		try {
+			stmt = connection.createStatement();
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckReservations") + "'" + email + "'");
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		try {
+			rs.next();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+//		System.out.println("contraseña: " + rs.getString(1));
+		try {
+			retorno=rs.getString(1);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+			
+			if(stmt != null) { 
+				try {
+					stmt.close();
+				} catch (SQLException e) { e.printStackTrace(); } 
+			}
+			
+			dbConnection.closeConnection();
+		
+	} catch (FileNotFoundException e) {	e.printStackTrace(); } 
+	  catch (IOException e) { e.printStackTrace(); }
+	return retorno;
+}
+
+public static Timestamp getProximaReserva(String email) {
+	  Timestamp proxima = null;
+	
+	  DBConnection dbConnection = new DBConnection();
+	  Connection connection = null;
+	  
+	
+	  try {
+		  connection = dbConnection.getConnection();
+	  } catch (IOException e) { e.printStackTrace(); }
+		
+	  Properties cons = new Properties();
+	  
+	  try {
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+	  } catch (IOException e) { e.printStackTrace(); }
+	  
+	  PreparedStatement ps = null;
+	  
+	  try {
+		  ps = connection.prepareStatement(cons.getProperty("CheckFirstReservation"));
+		  ps.setString(1, email);
+	  } catch (SQLException e) { e.printStackTrace(); }
+	  	  
+	  ResultSet rs = null;
+	  
+	  try {
+		  rs = (ResultSet) ps.executeQuery();
+		  rs.next();
+	  } catch (SQLException e) { e.printStackTrace(); }
+	  
+	  try {
+		proxima=rs.getTimestamp(1);
+	  } catch (SQLException e) { e.printStackTrace(); }
+	
+	return proxima;
+}
+
 }

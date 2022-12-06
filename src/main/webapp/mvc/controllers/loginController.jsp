@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:useBean  id="User" scope="session" class="display.javabean.CustomerBean"></jsp:useBean>
+<jsp:useBean  id="usuario" scope="session" class="display.javabean.CustomerBean"></jsp:useBean>
 <%@ page import="business.UsuarioDTO" %>
 <%@ page import="data.dao.UsuarioDAO" %>
 <%@ page import="data.common.SystemManager" %>
@@ -22,25 +22,16 @@
 			if(UsuarioDAO.comprobarPassword(mail, password) == true) {
 				nextPage = "../../index.jsp";
 				nextPageMessage = "";
+				usuario.setUsuario(mail);
+				usuario.setRol(UsuarioDAO.getRole(mail));
 			}
 			/* else {
 				System.out.println("contraseña incorrecta!");
 			} */
-	%>
-	<!-- si descomentamos esto no funciona, creo que es porque el bean no funciona -->
-	<%-- <jsp:setProperty property="mail" value="<%=mail%>" name="User"/> --%>
-	<%
 		} else if(mail != null) { 
 			nextPageMessage = "error";
-	%>
-	
-	<%
-		} else {
-	%>
-	<jsp:setProperty property="email" value="" name="User"/>
-	<%
-		}
-	%>
+
+		} %>
 </body>
 </html>
 <%

@@ -34,5 +34,13 @@ public class CustomerBean implements java.io.Serializable{
 		return rol;
 	}
 	
+	public void setUsuario (String usuario) {
+		user=usuario;
+	}
+	
+	public void setRol(String role) {
+		rol=role;
+	}
+	
 
 }
