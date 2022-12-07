@@ -38,20 +38,25 @@
 		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
-  		<tr>
-  			<th>Nombre</th>
-    		<th>Antigüedad</th>
-    		<th>Número de reservas</th>
- 		</tr>
-		<% ArrayList<UsuarioDTO> users = UsuarioDAO.listarUsuarios(); 
-		for(int i=0;i<users.size();i++){%>
-		  <tr>
-    		<td><%out.println(users.get(i).getNameSurname()); %></td>
-    		<td><%out.println(UsuarioDAO.calcularAntiguedad(users.get(i).getEmail())); %></td>
-    		<td><%out.println(UsuarioDAO.getNReservas(users.get(i).getEmail())); %></td>
-  		</tr>
-		
+	  		<tr>
+	  			<th>Nombre</th>
+	    		<th>Antigüedad</th>
+	    		<th>Número de reservas</th>
+	 		</tr>
+			<% ArrayList<UsuarioDTO> users = UsuarioDAO.listarUsuarios(); 
+			ArrayList<Integer> ant = UsuarioDAO.calcularAntiguedadArray();
+			ArrayList<Integer> res = UsuarioDAO.getNReservasArr();
+			for(int i=0;i<users.size();i++){%>
+			<tr>
+	    		<td><%out.println(users.get(i).getNameSurname()); %></td>
+	    		<td><%out.println(ant.get(i)); %></td>
+	    		<td><%out.println(res.get(i)); %></td>
+  			</tr>		
 		<%} %>
+		</table>
+		
+		<a href="/Práctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/views/SearchByEmailView.jsp">Modificar Datos</a>
 	</div>
 	<% }
 	else if(usuario.getRol().equals("Cliente")){

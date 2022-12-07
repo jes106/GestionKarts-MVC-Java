@@ -114,7 +114,7 @@ public class UsuarioDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			
+
 			Properties cons = new Properties();
 			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
@@ -146,13 +146,12 @@ public class UsuarioDAO {
 		return ret;
   }
   
-  
   public static boolean comprobarPassword(String email, String password) throws SQLException{
 	  boolean ret = false;
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-			
+
 			Properties cons = new Properties();
 			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
@@ -328,7 +327,7 @@ public class UsuarioDAO {
 	  
 	  	DBConnection dbConnection = new DBConnection();
 	  	Connection connection = null;
-	  	
+
 		try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
@@ -368,14 +367,10 @@ public class UsuarioDAO {
 	  return users;
   }
 
-  
-  
-  
   /**
    * Function to calculate the seniority of a client
    * @return the seniority of the user
    */
-
    @SuppressWarnings("deprecation")
 public static int calcularAntiguedad(String mail){
 	   
@@ -417,52 +412,128 @@ public static int calcularAntiguedad(String mail){
 	  return -1;
    }
 
+   public static ArrayList<Integer> calcularAntiguedadArray(){
+	   	  ArrayList<Integer> array = new ArrayList<Integer>();
+	   
+		  DBConnection dbConnection = new DBConnection();
+		  Connection connection = null;
 
-public static String getNReservas(String email) {
-	String retorno="";
-	
-	try {
-		DBConnection dbConnection = new DBConnection();
-		Connection connection = dbConnection.getConnection();
-		
-		Properties cons = new Properties();
-		cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	
-		Statement stmt = null;
-		try {
-			stmt = connection.createStatement();
-		} catch (SQLException e) { e.printStackTrace(); }
-		
-		ResultSet rs = null;
-		
-		try {
-			rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckReservations") + "'" + email + "'");
-		} catch (SQLException e) { e.printStackTrace(); }
-		
-		try {
-			rs.next();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-//		System.out.println("contraseña: " + rs.getString(1));
-		try {
-			retorno=rs.getString(1);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+		  try {
+			  connection = dbConnection.getConnection();
+		  } catch (IOException e) { e.printStackTrace(); }
 			
-			if(stmt != null) { 
-				try {
-					stmt.close();
-				} catch (SQLException e) { e.printStackTrace(); } 
+		  Properties cons = new Properties();
+		  
+		  try {
+			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		  } catch (IOException e) { e.printStackTrace(); }
+		  
+		  PreparedStatement ps = null;
+		  
+		  try {
+			  ps = connection.prepareStatement(cons.getProperty("SeniorityUserArr"));
+		  } catch (SQLException e) { e.printStackTrace(); }
+
+		  ResultSet rs;
+		  
+		  try {
+			  rs = (ResultSet) ps.executeQuery();
+			  while(rs.next()) {
+				  int diferencia = (new Date(new java.util.Date().getTime()).getYear() + 1900) - ((rs.getDate("InscriptionD")).getYear() + 1900);
+				  if( (rs.getDate("InscriptionD")).getMonth() > new Date(new java.util.Date().getTime()).getMonth() ) {
+					  diferencia--;
+				  }
+				  
+				  array.add(Math.abs(diferencia));
+			  }
+		  } catch (SQLException e) { e.printStackTrace(); }
+		  
+		  dbConnection.closeConnection();
+		  
+		  return array;
+	   }
+
+	public static String getNReservas(String email) {
+		String retorno="";
+		
+		try {
+			DBConnection dbConnection = new DBConnection();
+			Connection connection = dbConnection.getConnection();
+			
+			Properties cons = new Properties();
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		
+			Statement stmt = null;
+			try {
+				stmt = connection.createStatement();
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			ResultSet rs = null;
+			
+			try {
+				rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckReservations") + "'" + email + "'");
+			} catch (SQLException e) { e.printStackTrace(); }
+			
+			try {
+				rs.next();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
 			}
+	//		System.out.println("contraseña: " + rs.getString(1));
+			try {
+				retorno=rs.getString(1);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+				
+				if(stmt != null) { 
+					try {
+						stmt.close();
+					} catch (SQLException e) { e.printStackTrace(); } 
+				}
+				
+				dbConnection.closeConnection();
 			
-			dbConnection.closeConnection();
-		
-	} catch (FileNotFoundException e) {	e.printStackTrace(); } 
-	  catch (IOException e) { e.printStackTrace(); }
-	return retorno;
-}
+		} catch (FileNotFoundException e) {	e.printStackTrace(); } 
+		  catch (IOException e) { e.printStackTrace(); }
+		return retorno;
+	}
+	
+	public static ArrayList<Integer> getNReservasArr() {
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		   
+		  DBConnection dbConnection = new DBConnection();
+		  Connection connection = null;
+
+		  try {
+			  connection = dbConnection.getConnection();
+		  } catch (IOException e) { e.printStackTrace(); }
+			
+		  Properties cons = new Properties();
+		  
+		  try {
+			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		  } catch (IOException e) { e.printStackTrace(); }
+		  
+		  PreparedStatement ps = null;
+		  
+		  try {
+			  ps = connection.prepareStatement(cons.getProperty("CountReservation"));
+		  } catch (SQLException e) { e.printStackTrace(); }
+
+		  ResultSet rs;
+		  
+		  try {
+			  rs = (ResultSet) ps.executeQuery();
+			  while(rs.next()) { 
+				  array.add(rs.getInt(1));
+			  }
+		  } catch (SQLException e) { e.printStackTrace(); }
+		  
+		  dbConnection.closeConnection();
+		  
+		  return array;
+	}
 
 public static Timestamp getProximaReserva(String email) {
 	  Timestamp proxima = null;
