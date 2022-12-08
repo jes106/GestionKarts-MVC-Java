@@ -12,7 +12,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Reserva de Karts</title>
-<link href="/Prï¿½ctica3/styles.css" rel="stylesheet" type="text/css">
+<link href="/Práctica3/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -24,25 +24,25 @@
 	
 		<div class="container">
 		<h1>Aplicacion de Karts</h1>
-		<h2>acceder al sistema</h2>
-		<a href="/Prï¿½ctica3/mvc/views/LoginView.jsp">Acceder</a>
-		<a href="/Prï¿½ctica3/mvc/views/RegisterView.jsp">Registrarse</a>
+		<h2>Acceder al sistema</h2>
+		<a href="/Práctica3/mvc/views/LoginView.jsp">Acceder</a>
+		<a href="/Práctica3/mvc/views/RegisterView.jsp">Registrarse</a>
 	</div>
 	
 	<% }
 	else if(usuario.getRol().equals("Administrador")) { 
 	%>
 		<div class="container">
-		<h1>Estï¿½s logueado como: "Administrador"</h1>
-		<p>ï¿½Bienvenido <%out.println(usuario.getUsuario()); %></p>
+		<h1>Estás logueado como: "Administrador"</h1>
+		<p>Bienvenido <%out.println(usuario.getUsuario()); %></p>
 		
 		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
 	  		<tr>
 	  			<th>Nombre</th>
-	    		<th>Antigï¿½edad</th>
-	    		<th>Nï¿½mero de reservas</th>
+	    		<th>Antigüedad</th>
+	    		<th>Número de reservas</th>
 	 		</tr>
 			<% ArrayList<UsuarioDTO> users = UsuarioDAO.listarUsuarios(); 
 			ArrayList<Integer> ant = UsuarioDAO.calcularAntiguedadArray();
@@ -56,8 +56,8 @@
 		<%} %>
 		</table>
 		
-		<a href="/Prï¿½ctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
-		<a href="/Prï¿½ctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
+		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 
 	</div>
 	<% }
@@ -65,25 +65,25 @@
 	%>
 		<% Timestamp res = UsuarioDAO.getProximaReserva(usuario.getUsuario()); %>
 		<div class="container">
-		<p>ï¿½Bienvenido <%out.println(usuario.getUsuario()); %>!</p>
+		<p>Bienvenido <%out.println(usuario.getUsuario()); %>!</p>
 	
 		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
-		<p>Su antigï¿½edad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %></p>
+		<p>Su antigüedad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %></p>
 		<% if(res == null) { %>
-			<p>Su prï¿½xima reserva es el: No tiene reservas.</p>
+			<p>Su próxima reserva es el: No tiene reservas.</p>
 		<% }else { %>
-			<p>Su prï¿½xima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
+			<p>Su próxima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
 		<% } %>
-		<a href="/Prï¿½ctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
-		<a href="/Prï¿½ctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
+		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
 	</div>
 	
 	<%
 	}
 	else{
 		%>
-		<a href="/Prï¿½ctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
-		<a href="/Prï¿½ctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
+		<a href="/Práctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
 	<%
 	}
 	%>
