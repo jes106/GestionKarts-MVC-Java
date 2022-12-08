@@ -12,7 +12,7 @@
 		if(request.getParameter("error") != null) {
 	%>
 	<div class="animation">
-	<div class="error">ERROR: el Email no pertenece a ningun usario!</div>
+	<div class="error"><%= request.getParameter("error") %></div>
 	</div>
 	<%
 		}

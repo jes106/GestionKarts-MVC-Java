@@ -29,15 +29,28 @@
 			else if(opcion.equals("Password")){
 				user.setPassword(valor);
 				UsuarioDAO.modPassUser(user);
+				nextPage = "../../index.jsp";
 			}
 			else if(opcion.equals("Fecha de nacimiento (format DD-MM-YYYY)")){
 				valor = valor + " 00:00:00";
 				user.setBirthDate(SystemManager.StringToDateSQL(valor));
 				UsuarioDAO.modBirhtUser(user);
+				nextPage = "../../index.jsp";
 			}
 			else if(opcion.equals("Rol (\"Administrador\" o \"Cliente\")")){
-				user.setRol(valor);
-				UsuarioDAO.modRolUser(user);
+				if(valor.equals("Cliente") || valor.equals("Administrador")){
+					user.setRol(valor);
+					UsuarioDAO.modRolUser(user);
+					nextPage = "../../index.jsp";
+				}else{
+					
+				}
+				nextPageMessage = "ERROR. Rol introducido incorrecto. Pueder ser <Cliente> o <Administrador>";
+	%>
+				<jsp:forward page="<%=nextPage%>">
+		    		<jsp:param name="error" value="<%=nextPageMessage%>"/>
+				</jsp:forward>
+	<%
 			}
 	%>
 			<jsp:forward page="<%=nextPage%>" />
