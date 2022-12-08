@@ -45,7 +45,7 @@
 				}else{
 					
 				}
-				nextPageMessage = "ERROR. Rol introducido incorrecto. Pueder ser <Cliente> o <Administrador>";
+				nextPageMessage = "ERROR. Rol introducido incorrecto. Puede ser Cliente o Administrador";
 	%>
 				<jsp:forward page="<%=nextPage%>">
 		    		<jsp:param name="error" value="<%=nextPageMessage%>"/>
