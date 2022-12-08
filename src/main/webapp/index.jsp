@@ -55,7 +55,7 @@
 		<%} %>
 		</table>
 		
-		<a href="/Práctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 		<a href="/Práctica3/mvc/views/SearchByEmailView.jsp">Modificar Datos</a>
 	</div>
 	<% }
@@ -77,7 +77,7 @@
 	}
 	else{
 		%>
-		<a href="/Práctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
+		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 		<a href="/Práctica3/mvc/views/SearchByEmailView.jsp">Modificar Datos</a>
 	<%
 	}
