@@ -11,7 +11,9 @@
 	<%
 		if(request.getParameter("error") != null) {
 	%>
-	<p class="red-text">ERROR: email o contraseña incorrectos!</p>
+	<div class="animation">
+	<div class="error">ERROR: email o contraseña incorrectos!</div>
+	</div>
 	<%
 		}
 	%>

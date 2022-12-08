@@ -12,7 +12,9 @@
 	<%
 		if(request.getParameter("error") != null) {
 	%>
-	<p class="red-text">ERROR: el Email no pertenece a ningun usario!</p>
+	<div class="animation">
+	<div class="error">ERROR: el Email no pertenece a ningun usario!</div>
+	</div>
 	<%
 		}
 	%>
@@ -36,29 +38,31 @@
 		</div>
 		
 		<% if(request.getParameter("persona") != null){ %>
-		<form method="post" action="../controllers/ModifyUserController.jsp">
-			<div class="field">
-				<label for="email">Parámetro a modificar:</label>
-				<select name="menu" required>
-					<option selected="true" disabled="disabled"> -- Seleccione --</option>
-	  				<option>Nombre</option>
-	  				<option>Password</option>
-	  				<option>Fecha de nacimiento (format DD-MM-YYYY)</option>
-					<option>Rol ("Administrador" o "Cliente")</option>
-				</select>
-				<% if(persona != null && persona.equals("Otro Usuario")){ %>
-					<label for="email">Email: </label>
-					<input type="text" name="email" value=""> 
-				<% } else {%>
-					<label for="email">Email: </label>
-					<input type="text" readonly name="email" value=<%= usuario.getUsuario() %>>
-				<% } %>
-				<label for="nuevo">Nuevo parámetro: </label>
-				<input type="text" name="nuevo" value="" required>
+		<div class="note-form">
+			<form method="post" action="../controllers/ModifyUserController.jsp">
+				<div class="field">
+					<label for="email">Parámetro a modificar:</label>
+					<select name="menu" required>
+						<option selected="true" disabled="disabled"> -- Seleccione --</option>
+		  				<option>Nombre</option>
+		  				<option>Password</option>
+		  				<option>Fecha de nacimiento (format DD-MM-YYYY)</option>
+						<option>Rol ("Administrador" o "Cliente")</option>
+					</select>
+					<% if(persona != null && persona.equals("Otro Usuario")){ %>
+						<label for="email">Email: </label>
+						<input type="text" name="email" value=""> 
+					<% } else {%>
+						<label for="email">Email: </label>
+						<input type="text" readonly name="email" value=<%= usuario.getUsuario() %>>
+					<% } %>
+					<label for="nuevo">Nuevo parámetro: </label>
+					<input type="text" name="nuevo" value="" required>
+				</div>
+				<br />
+				<input type="submit" value="Acceder">
+			</form>
 			</div>
-			<br />
-			<input type="submit" value="Acceder">
-		</form>
 		</div>
 		<% } %>
 	<% } %>

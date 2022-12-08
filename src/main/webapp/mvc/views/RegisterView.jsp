@@ -11,7 +11,9 @@
 	<%
 		if(request.getParameter("error") != null) {
 	%>
-	<p class="red-text">ERROR: no se ha registrado!</p>
+	<div class="animation">
+	<div class="error">ERROR: no se ha registrado!</div>
+	</div>
 	<%
 		}
 	%>

@@ -11,7 +11,9 @@
 	<%
 		if(request.getParameter("error") != null) {
 	%>
-	<p class="red-text">ERROR: el Email no pertenece a ningun usario!</p>
+	<div class="animation">
+	<div class="error">ERROR: el Email no pertenece a ningun usario!</div>
+	</div>
 	<%
 		}
 	%>
