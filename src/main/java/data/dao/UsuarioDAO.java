@@ -184,6 +184,7 @@ public class UsuarioDAO {
 }
   
   public static UsuarioDTO getUser(String email) {
+	  UsuarioDTO user = null;
 	  DBConnection dbConnection = new DBConnection();
 	  Connection connection = null;
 	  
@@ -194,7 +195,7 @@ public class UsuarioDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
@@ -212,11 +213,11 @@ public class UsuarioDAO {
 	  } catch (SQLException e) { e.printStackTrace(); }
 	  
 	  try {
-		UsuarioDTO user = new UsuarioDTO(rs.getString("Name"), rs.getTimestamp("BirthDay"), rs.getString("Email"), rs.getString("Rol"));
+		user = new UsuarioDTO(rs.getString("Name"), rs.getTimestamp("BirthDay"), rs.getString("Email"), rs.getString("Rol"));
 		user.setInscription(rs.getTimestamp("InscriptionD"));
 	  } catch (SQLException e) { e.printStackTrace(); }
 	  
-	  return null;
+	  return user;
   }
     
   public static void modBirhtUser(UsuarioDTO user) {
@@ -231,7 +232,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
@@ -255,7 +256,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps;
@@ -279,7 +280,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps;
@@ -303,7 +304,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps;
@@ -372,7 +373,7 @@ public class UsuarioDAO {
    * @return the seniority of the user
    */
    @SuppressWarnings("deprecation")
-public static int calcularAntiguedad(String mail){
+   public static int calcularAntiguedad(String mail){
 	   
 	  DBConnection dbConnection = new DBConnection();
 	  Connection connection = null;
@@ -452,8 +453,8 @@ public static int calcularAntiguedad(String mail){
 		  
 		  return array;
 	   }
-
-	public static String getNReservas(String email) {
+   
+   public static String getNReservas(String email) {
 		String retorno="";
 		
 		try {
@@ -535,7 +536,7 @@ public static int calcularAntiguedad(String mail){
 		  return array;
 	}
 
-public static Timestamp getProximaReserva(String email) {
+	public static Timestamp getProximaReserva(String email) {
 	  Timestamp proxima = null;
 	
 	  DBConnection dbConnection = new DBConnection();
@@ -563,11 +564,9 @@ public static Timestamp getProximaReserva(String email) {
 	  
 	  try {
 		  rs = (ResultSet) ps.executeQuery();
-		  rs.next();
-	  } catch (SQLException e) { e.printStackTrace(); }
-	  
-	  try {
-		proxima=rs.getTimestamp(1);
+		  if(rs.next()) {
+			  proxima=rs.getTimestamp(1);
+		  }
 	  } catch (SQLException e) { e.printStackTrace(); }
 	
 	return proxima;
