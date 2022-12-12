@@ -29,7 +29,7 @@
 				System.out.println("contraseña incorrecta!");
 			} */
 		} else if(mail != null) { 
-			nextPageMessage = "error";
+			nextPageMessage = "Error: email o password incorrectos";
 
 		} %>
 </body>
