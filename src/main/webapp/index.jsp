@@ -58,6 +58,7 @@
 		
 		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 		<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
+		<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar nuevo usuario</a>
 
 	</div>
 	<% }

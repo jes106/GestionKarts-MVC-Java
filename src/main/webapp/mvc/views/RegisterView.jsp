@@ -51,7 +51,7 @@
 		<br/>
 		<div class="field">
 		<label for="rol">Rol: </label>
-		<input type="text" name="rol" value="">
+		<input type="text" readonly name="rol" value="Cliente">
 		</div>
 		<br />
 		<input type="submit" value="Acceder">
