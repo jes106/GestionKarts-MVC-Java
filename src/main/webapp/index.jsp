@@ -25,18 +25,21 @@
 		<div class="container">
 		<h1>Aplicacion de Karts</h1>
 		<h2>Acceder al sistema</h2>
-		<a href="/Práctica3/mvc/views/LoginView.jsp">Acceder</a>
-		<a href="/Práctica3/mvc/views/RegisterView.jsp">Registrarse</a>
+		<div class="botones">
+			<a href="/Práctica3/mvc/views/LoginView.jsp">Acceder</a>
+			<a href="/Práctica3/mvc/views/RegisterView.jsp">Registrarse</a>
+		</div>
 	</div>
 	
 	<% }
 	else if(usuario.getRol().equals("Administrador")) { 
 	%>
 		<div class="container">
-		<h1>Estás logueado como: "Administrador"</h1>
-		<p>Bienvenido <%out.println(usuario.getUsuario()); %></p>
-		
-		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
+			<div class="info">
+				<p>Estás logueado como: "Administrador"</p>
+				<p>Bienvenido <%out.println(usuario.getUsuario()); %></p>
+				<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
+			</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
 	  		<tr>
@@ -56,9 +59,11 @@
 		<%} %>
 		</table>
 		
-		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
-		<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
-		<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar nuevo usuario</a>
+		<div class="botones">
+			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+			<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
+			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
+		</div>
 
 	</div>
 	<% }
@@ -66,25 +71,28 @@
 	%>
 		<% Timestamp res = UsuarioDAO.getProximaReserva(usuario.getUsuario()); %>
 		<div class="container">
-		<p>Bienvenido <%out.println(usuario.getUsuario()); %>!</p>
-	
-		<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
-		<p>Su antigüedad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %></p>
-		<% if(res == null) { %>
-			<p>Su próxima reserva es el: No tiene reservas.</p>
-		<% }else { %>
-			<p>Su próxima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
-		<% } %>
-		<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
-		<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
-	</div>
+			<div class="info">
+				<p>Bienvenido <%out.println(usuario.getUsuario()); %>!</p>
+				<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
+				<p>Su antigüedad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %></p>
+			</div>
+			<% if(res == null) { %>
+				<p>Su próxima reserva es el: No tiene reservas.</p>
+			<% }else { %>
+				<p>Su próxima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
+			<% } %>
+			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+			<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
+		</div>
 	
 	<%
 	}
 	else{
 		%>
-		<a href="/Práctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
-		<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
+		<div class="botones">
+			<a href="/Práctica3/mvc/controller/disconnectController.jsp">Desconectar</a>
+			<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
+		</div>
 	<%
 	}
 	%>
