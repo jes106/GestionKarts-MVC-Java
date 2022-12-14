@@ -44,6 +44,8 @@
 			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 			<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
+			<a href="/Práctica3/mvc/views/altaKartView.jsp">Añadir Kart</a>
+			<a href="/Práctica3/mvc/views/altaPistaView.jsp">Añadir Pista</a>
 		</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
