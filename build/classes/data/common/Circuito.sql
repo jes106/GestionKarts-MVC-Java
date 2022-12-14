@@ -24,7 +24,7 @@ CREATE TABLE `Tracks`(
 ) TYPE = InnoDB ;
 
 CREATE TABLE `Bono` (
-    `IdNumber` INT( 4 ) NOT NULL ,
+    `IdNumber` INT( 4 ) NOT NULL AUTO_INCREMENT,
     `SessionNumber` BOOL NOT NULL ,
     `DateCreated` DATETIME NOT NULL,
     `Type` ENUM('infantil', 'familiar', 'adultos') NOT NULL ,
@@ -34,7 +34,7 @@ CREATE TABLE `Bono` (
 ) TYPE = InnoDB ;
 
 CREATE TABLE `Reservations` (
-    `Id` INT( 3 ) NOT NULL,
+    `Id` INT( 3 ) NOT NULL AUTO_INCREMENT,
     `Email` VARCHAR( 32 ) NOT NULL ,
     `Date` DATETIME NOT NULL ,
     `Lenght` INT( 3 ) NOT NULL ,
@@ -52,7 +52,7 @@ CREATE TABLE `Reservations` (
 ) TYPE = InnoDB ;
 
 CREATE TABLE `Karts` (
-    `Id` INT( 3 ) NOT NULL ,
+    `Id` INT( 3 ) NOT NULL AUTO_INCREMENT,
     `Child` BOOL NOT NULL ,
     `State` ENUM( 'Reservado', 'Disponible', 'Mantenimiento' ) NOT NULL ,
     `TrackName` VARCHAR( 32 ) NULL,
@@ -96,14 +96,14 @@ INSERT INTO `Tracks` ( `Name` , `State` , `Difficulty` , `MaxKarts` ) VALUES ( '
 INSERT INTO `Tracks` ( `Name` , `State` , `Difficulty` , `MaxKarts` ) VALUES ( 'Lisboa', '1', 'familiar', '5' );
 INSERT INTO `Tracks` ( `Name` , `State` , `Difficulty` , `MaxKarts` ) VALUES ( 'Katar', '0', 'familiar', '6' );
 
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '0', 'false', 'Mantenimiento', 'Brazil' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '1', 'true', 'Disponible', 'Tokio' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '2', 'true', 'Mantenimiento', 'Brazil' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '3', 'false', 'Reservado', 'Lisboa' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '4', 'true', 'Disponible', 'Lisboa' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '5', 'true', 'Disponible', 'Tokio' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '6', 'false', 'Disponible', 'Lisboa' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '7', 'false', 'Disponible', 'Brazil' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '8', 'true', 'Disponible', 'Brazil' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '9', 'false', 'Reservado', 'Lisboa' );
-INSERT INTO `Karts` ( `Id` , `Child` , `State` , `TrackName` ) VALUES ( '10', 'false', 'Disponible', 'Lisboa' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'false', 'Mantenimiento', 'Brazil' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'true', 'Disponible', 'Tokio' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'true', 'Mantenimiento', 'Brazil' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'false', 'Reservado', 'Lisboa' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'true', 'Disponible', 'Lisboa' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'true', 'Disponible', 'Tokio' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'false', 'Disponible', 'Lisboa' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'false', 'Disponible', 'Brazil' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'true', 'Disponible', 'Brazil' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'false', 'Reservado', 'Lisboa' );
+INSERT INTO `Karts` ( `Child` , `State` , `TrackName` ) VALUES ( 'false', 'Disponible', 'Lisboa' );

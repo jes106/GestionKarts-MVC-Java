@@ -7,10 +7,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import business.KartDTO;
 import data.common.DBConnection;
+import data.common.EstadoKart;
 
 public class KartDAO {
 	public static void crearKart(KartDTO kart){
@@ -99,4 +101,45 @@ public class KartDAO {
 		
 		return false;
 	}
+
+	public static ArrayList<KartDTO> kartListNoAssociated(){
+		ArrayList<KartDTO> karts = new ArrayList<KartDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e2) { e2.printStackTrace(); }
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("GetListKartNoAssociated"));
+		} catch (SQLException e1) { e1.printStackTrace(); }
+		
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			while(rs.next()) {
+				karts.add(new KartDTO(rs.getInt("id"), rs.getBoolean("Child"), EstadoKart.valueOf(rs.getString("State"))));
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		    
+		dbConnection.closeConnection();
+		
+		return karts;
+	}
+	
 }
