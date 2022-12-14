@@ -46,6 +46,7 @@
 			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
 			<a href="/Práctica3/mvc/views/altaKartView.jsp">Añadir Kart</a>
 			<a href="/Práctica3/mvc/views/altaPistaView.jsp">Añadir Pista</a>
+			<a href="/Práctica3/mvc/views/SelectTypeView.jsp">Asociar Kart-Pista</a>
 		</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
