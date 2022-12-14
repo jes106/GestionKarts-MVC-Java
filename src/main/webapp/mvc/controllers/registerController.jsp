@@ -5,6 +5,9 @@
 <%@ page import="data.common.SystemManager" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="data.dao.UsuarioDAO" %>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+
 
 
 <!DOCTYPE html>
@@ -20,20 +23,23 @@
 		
 		String name = request.getParameter("name");
 		
-		String Sday = request.getParameter("day");
-		int day = Integer.parseInt(Sday);
-		
-		String Smonth = request.getParameter("month");
-		int month = Integer.parseInt(Smonth);
-		
-		String Syear = request.getParameter("year");
-		int year = Integer.parseInt(Syear);
+		String date = request.getParameter("date");
+		System.out.println(date);
+		// Crear un objeto DateFormat con el formato de fecha esperado
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		// Parsear la cadena de entrada usando el formato especificado
+		Date fecha = df.parse(date);
+
+		// Obtener el día, mes y año del objeto Date
+		int day = fecha.getDay();
+		int month = fecha.getMonth();
+		int year = fecha.getYear();
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String rol = request.getParameter("rol");
 	
-		String date = day + "-" + month + "-" + year + " " + 00 + ":" + 00 + ":" + 00;		
+		String fechaFormateada = day + "-" + month + "-" + year + " " + 00 + ":" + 00 + ":" + 00;		
 	
 		
 		if(UsuarioDAO.altaUsuario(new UsuarioDTO(name, password, SystemManager.StringToDateSQL(date), email, rol)) == true) {

@@ -40,6 +40,11 @@
 				<p>Bienvenido <%out.println(usuario.getUsuario()); %></p>
 				<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
 			</div>
+		<div class="botones">
+			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+			<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
+			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
+		</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
 	  		<tr>
@@ -59,11 +64,6 @@
 		<%} %>
 		</table>
 		
-		<div class="botones">
-			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
-			<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
-			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
-		</div>
 
 	</div>
 	<% }

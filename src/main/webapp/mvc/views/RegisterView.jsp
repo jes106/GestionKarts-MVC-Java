@@ -25,20 +25,9 @@
 		</div>
 		<br/>
 		<div class="field">
-		<label for="day">día nacimiento (forma DD): </label>
-		<input type="text" name="day" value="">
+		<label for="date">fecha de nacimiento: </label>
+		<input type="date" name="date" value="">
 		</div>
-		<br/>
-		<div class="field">
-		<label for="month">mes nacimiento (fomra MM): </label>
-		<input type="text" name="month" value="">	
-		</div>
-		<br/>
-		<div class="field">
-		<label for="year">año nacimiento (fomra YYYY): </label>
-		<input type="text" name="year" value="">	
-		</div>
-		<br/>
 		<div class="field">
 		<label for="email">Email: </label>
 		<input type="text" name="email" value="">	
