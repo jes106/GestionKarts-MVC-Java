@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Registro</title>
+<title>Añadir una Pista</title>
 <link href="../views/formStyles.css" rel="stylesheet" type="text/css">
 </head>
 <body>

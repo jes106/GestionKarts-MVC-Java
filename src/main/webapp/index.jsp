@@ -83,8 +83,10 @@
 			<% }else { %>
 				<p>Su próxima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
 			<% } %>
-			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
-			<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
+			<div class="botones">
+				<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+				<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar mis datos</a>
+			</div>
 		</div>
 	
 	<%

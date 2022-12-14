@@ -21,12 +21,12 @@
 	<form method="post" action="../controllers/loginController.jsp">
 		<div class="field">
 		<label for="email">Email: </label>
-		<input type="text" name="email" value="">
+		<input type="text" name="email" value="" required>
 		</div>	
 		<br />
 		<div class="field">
 		<label for="password">Contraseña: </label>
-		<input type="password" name="password" value="">
+		<input type="password" name="password" value="" required>
 		</div>	
 		<br />
 		<input type="submit" value="Acceder">
