@@ -23,12 +23,11 @@
 		<div class="field">
 			<label for="Tipo">Selecciona el tipo: </label>
 			<select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-				<option >Tipo</option>
-				<option value="http://google.com">Adulto</option>
-				<option value="/Práctica3/mvc/views/altaPistaView.jsp">Infantil</option>
+				<option value="/Práctica3/mvc/views/SelectTypeView.jsp">Tipo</option>
+				<option value="/Práctica3/mvc/views/AsociateAdultKartPistaView.jsp">Adulto</option>
+				<option value="/Práctica3/mvc/views/AsociateChildKartPistaView.jsp">Infantil</option>
 			</select>
 		</div>
-		<br/>
 	</form>
 	</div>
 </body>
