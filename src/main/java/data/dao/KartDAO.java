@@ -102,8 +102,8 @@ public class KartDAO {
 		return false;
 	}
 
-	public static ArrayList<KartDTO> kartListNoAssociated(){
-		ArrayList<KartDTO> karts = new ArrayList<KartDTO>();
+	public static ArrayList<Integer> kartListNoAssociatedChild(){
+		ArrayList<Integer> karts = new ArrayList<Integer>();
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = null;
@@ -125,7 +125,7 @@ public class KartDAO {
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetListKartNoAssociated"));
+			ps = connection.prepareStatement(cons.getProperty("GetListKartNoAssociatedChild"));
 		} catch (SQLException e1) { e1.printStackTrace(); }
 		
 		ResultSet rs = null;
@@ -133,7 +133,7 @@ public class KartDAO {
 		try {
 			rs = (ResultSet) ps.executeQuery();
 			while(rs.next()) {
-				karts.add(new KartDTO(rs.getInt("id"), rs.getBoolean("Child"), EstadoKart.valueOf(rs.getString("State"))));
+				karts.add(rs.getInt("id"));
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
 		    
