@@ -14,6 +14,7 @@ import com.mysql.jdbc.ResultSet;
 
 import business.PistaDTO;
 import data.common.*;
+import data.common.Dificultad;
 /**
  * This class manages the pista class
  * @author Juan José Trenado Zafra
@@ -311,6 +312,51 @@ public class PistaDAO {
 
 		
 	}
+
+  public static ArrayList<String> trackList(int child){
+	  	ArrayList<String> tracks = new ArrayList<String>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e2) { e2.printStackTrace(); }
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("GetListTrack"));
+			ps.setString(1, Dificultad.familiar.toString());
+			if(child == 1) { ps.setString(2, Dificultad.infantil.toString()); }
+			else { ps.setString(2, Dificultad.adultos.toString()); }
+		} catch (SQLException e1) { e1.printStackTrace(); }
+		
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			while(rs.next()) {
+				if(comprobarSitiosLibrePista(rs.getString("Name")) == true) {
+					tracks.add(rs.getString("Name"));
+				}
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		    
+		dbConnection.closeConnection();
+		
+		return tracks;
+  }
 }
 
 

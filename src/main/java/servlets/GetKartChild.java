@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import business.KartDTO;
 import data.dao.KartDAO;
 
 /**
- * Servlet implementation class KartListServelt
+ * Servlet implementation class GetKartChild
  */
-@WebServlet("/KartListServelt")
-public class KartListServelt extends HttpServlet {
+@WebServlet("/GetKartChild")
+public class GetKartChild extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KartListServelt() {
+    public GetKartChild() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +31,8 @@ public class KartListServelt extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<KartDTO> karts = KartDAO.kartListNoAssociated();		
-		request.setAttribute("karts", karts);
+		ArrayList<Integer> karts = KartDAO.kartListNoAssociated(1);		
+		request.setAttribute("ID", karts);
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 	}
 }

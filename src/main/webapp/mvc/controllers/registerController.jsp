@@ -22,39 +22,23 @@
 		String nextPageMessage = null;
 		
 		String name = request.getParameter("name");
-		
 		String date = request.getParameter("date");
-		System.out.println(date);
-		// Crear un objeto DateFormat con el formato de fecha esperado
-		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-		// Parsear la cadena de entrada usando el formato especificado
-		Date fecha = df.parse(date);
-
-		// Obtener el día, mes y año del objeto Date
-		int day = fecha.getDay();
-		int month = fecha.getMonth();
-		int year = fecha.getYear();
-		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String rol = request.getParameter("rol");
 	
-		String fechaFormateada = day + "-" + month + "-" + year + " " + 00 + ":" + 00 + ":" + 00;		
-	
-		
-		if(UsuarioDAO.altaUsuario(new UsuarioDTO(name, password, SystemManager.StringToDateSQL(date), email, rol)) == true) {
-			nextPage = "../../index.jsp";
-			nextPageMessage = "";
-		}
-		
-		else if(email != null) { 
+		String fechaFormateada = date + " 00:00:00";		
+		if(fechaFormateada != null){
+			if(UsuarioDAO.altaUsuario(new UsuarioDTO(name, password, SystemManager.StringToDateSQL(fechaFormateada), email, rol)) == true) {
+				nextPage = "../../index.jsp";
+				nextPageMessage = "";
+			}else if(email != null) { 
 			nextPageMessage = "error";
-		}
-		
-		else {
-	%>
-	<jsp:setProperty property="email" value="" name="User"/>
-	<%
+			}else{
+				%>
+				<jsp:setProperty property="email" value="" name="User"/>
+				<%
+			}
 		}
 	%>
 	
