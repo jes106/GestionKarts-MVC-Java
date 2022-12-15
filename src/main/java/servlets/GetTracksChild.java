@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -33,6 +34,8 @@ public class GetTracksChild extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> tracks = PistaDAO.trackList(1);		
 		request.setAttribute("Nombre", tracks);
-//		request.getRequestDispatcher("/Index.jsp").forward(request, response);
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.println(tracks);
 	}
 }
