@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import business.KartDTO;
 import data.dao.KartDAO;
 
 /**
- * Servlet implementation class GetKartChild
+ * Servlet implementation class GetKartAdult
  */
-@WebServlet("/GetKartChild")
-public class GetKartChild extends HttpServlet {
+@WebServlet("/GetKartAdult")
+public class GetKartAdult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetKartChild() {
+    public GetKartAdult() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +30,7 @@ public class GetKartChild extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Integer> karts = KartDAO.kartListNoAssociated(1);		
+		ArrayList<Integer> karts = KartDAO.kartListNoAssociated(0);		
 		request.setAttribute("ID", karts);
 		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 	}
