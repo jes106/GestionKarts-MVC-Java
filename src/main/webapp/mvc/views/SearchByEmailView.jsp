@@ -21,7 +21,7 @@
 	<form method="post" action="../controllers/searchByEmailController.jsp">
 		<div class="field">
 		<label for="email">Email: </label>
-		<input type="text" name="email" value="">	
+		<input type="text" name="email" value="" required>	
 		</div>
 		<br />
 		<input type="submit" value="Acceder">

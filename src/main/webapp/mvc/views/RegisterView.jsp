@@ -21,26 +21,26 @@
 	<form method="post" action="../controllers/registerController.jsp">
 		<div class="field">
 		<label for="name">Nombre y apellidos: </label>
-		<input type="text" name="name" value="">	
+		<input type="text" name="name" value="" required>	
 		</div>
 		<br/>
 		<div class="field">
 		<label for="date">fecha de nacimiento: </label>
-		<input type="date" name="date" value="">
+		<input type="date" name="date" value="" required>
 		</div>
 		<div class="field">
 		<label for="email">Email: </label>
-		<input type="text" name="email" value="">	
+		<input type="text" name="email" value="" required>	
 		</div>
 		<br/>
 		<div class="field">
 		<label for="password">Contraseña: </label>
-		<input type="password" name="password" value="">	
+		<input type="password" name="password" value="" required>	
 		</div>
 		<br/>
 		<div class="field">
 		<label for="rol">Rol: </label>
-		<input type="text" readonly name="rol" value="Cliente">
+		<input type="text" readonly name="rol" value="Cliente" required>
 		</div>
 		<br />
 		<input type="submit" value="Acceder">

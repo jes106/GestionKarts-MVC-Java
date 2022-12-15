@@ -43,7 +43,6 @@
 				<div class="field">
 					<label for="email">Parámetro a modificar:</label>
 					<select name="menu" required>
-						<option selected="true" disabled="disabled"> -- Seleccione --</option>
 		  				<option>Nombre</option>
 		  				<option>Password</option>
 		  				<option>Fecha de nacimiento (format DD-MM-YYYY)</option>
@@ -51,10 +50,11 @@
 					</select>
 					<% if(persona != null && persona.equals("Otro Usuario")){ %>
 						<label for="email">Email: </label>
-						<input type="text" name="email" value=""> 
+						<input type="text" name="email" value="" required> 
 					<% } else {%>
-						<label for="email">Email: </label>
+						<p style="display:none;">
 						<input type="text" readonly name="email" value=<%= usuario.getUsuario() %>>
+						</p>
 					<% } %>
 					<label for="nuevo">Nuevo parámetro: </label>
 					<input type="text" name="nuevo" value="" required>

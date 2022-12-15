@@ -44,6 +44,9 @@
 			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 			<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
+			<a href="/Práctica3/mvc/views/altaKartView.jsp">Añadir Kart</a>
+			<a href="/Práctica3/mvc/views/altaPistaView.jsp">Añadir Pista</a>
+			<a href="/Práctica3/mvc/views/SelectTypeView.jsp">Asociar Kart-Pista</a>
 		</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
@@ -81,8 +84,10 @@
 			<% }else { %>
 				<p>Su próxima reserva es el: <%out.println(UsuarioDAO.getProximaReserva(usuario.getUsuario())); %></p>
 			<% } %>
-			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
-			<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar Datos</a>
+			<div class="botones">
+				<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
+				<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar mis datos</a>
+			</div>
 		</div>
 	
 	<%
