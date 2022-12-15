@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,10 +33,19 @@ public class GetTracksChild extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<String> tracks = PistaDAO.trackList(1);		
-		request.setAttribute("Nombre", tracks);
+		ArrayList<String> tracks = PistaDAO.trackList(1);
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.println(tracks);
+		
+		Iterator<String> iterator = tracks.iterator();
+        while (iterator.hasNext()) {
+            out.print(iterator.next());
+            if (iterator.hasNext()) {
+                out.print(",");
+            }
+        }
+
+        // Cerrar el PrintWriter
+        out.close();
 	}
 }
