@@ -33,6 +33,6 @@ public class GetTracksChild extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> tracks = PistaDAO.trackList(1);		
 		request.setAttribute("Nombre", tracks);
-		request.getRequestDispatcher("/Index.jsp").forward(request, response);
+//		request.getRequestDispatcher("/Index.jsp").forward(request, response);
 	}
 }

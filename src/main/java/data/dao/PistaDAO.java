@@ -78,7 +78,7 @@ public class PistaDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  Statement stmt = null;
@@ -130,7 +130,7 @@ public class PistaDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	  
 		  
@@ -165,7 +165,7 @@ public class PistaDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  Statement stmt_track = null;
@@ -224,7 +224,7 @@ public class PistaDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
@@ -267,7 +267,7 @@ public class PistaDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	  
 	  // Lo primero es obtener aquellas pistas que no esten en mantenimiento y con la dificultad especificada
@@ -330,7 +330,7 @@ public class PistaDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
