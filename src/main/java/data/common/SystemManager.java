@@ -21,6 +21,19 @@ public class SystemManager {
 		return date;
 	}
 	
+	public static Timestamp StringToDateSQL2(String date_) {
+		
+		DateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		java.util.Date fecha = null;
+		try {
+			fecha = formato.parse(date_);
+		} catch (ParseException e) { e.printStackTrace(); }
+		
+		Timestamp date = new Timestamp(fecha.getTime());
+
+		return date;
+	}
+	
 	public static Timestamp DateToDateSQL(java.util.Date date_) {
 		Timestamp date = new Timestamp(date_.getTime());
 		return date;

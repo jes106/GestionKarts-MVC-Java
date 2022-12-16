@@ -16,6 +16,8 @@ import com.mysql.jdbc.ResultSet;
 import java.sql.*;
 
 import business.PistaDTO;
+import business.ReservaDTO;
+import business.ReservaMgr;
 import data.common.SystemManager;
 import data.common.DBConnection;
 import data.common.reservationfactory.*;
@@ -860,5 +862,58 @@ public class ReservaDAO {
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }
+	}
+
+	public static ArrayList<ArrayList<String>> listarReservaFechas(Timestamp inicio, Timestamp fin, String Email){
+		ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
+		int i = 0;
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e2) { e2.printStackTrace(); }
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("GetReservationDate"));
+			ps.setTimestamp(1, inicio);
+			ps.setTimestamp(2, fin);
+			ps.setString(3, Email);
+		} catch (SQLException e1) { e1.printStackTrace(); }
+		
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			while(rs.next()) {
+				ArrayList<String> var = new ArrayList<String>();
+				var.add(rs.getTimestamp("Date").toString());
+				var.add(rs.getString("Price"));
+				var.add(rs.getString("Track"));
+				var.add(rs.getString("Type"));
+				var.add(rs.getString("ChildremNumber"));
+				var.add(rs.getString("AdultsNumber"));
+				if(rs.getTimestamp("Date").before(new Timestamp(new java.util.Date().getTime()))) { var.add("Finalizada"); }
+				else { var.add("Futura"); }
+				res.add(var);
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		    
+		dbConnection.closeConnection();
+		
+		return res;
 	}
 }
