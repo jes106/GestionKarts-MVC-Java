@@ -26,7 +26,7 @@ public class KartDAO {
 		  Properties cons = new Properties();
 		  
 		  try {
-			  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		  } catch (IOException e) { e.printStackTrace(); }
 		  
 		  PreparedStatement ps;
@@ -51,7 +51,7 @@ public class KartDAO {
 		  Connection connection = dbConnection.getConnection();
 		  
 		  Properties cons = new Properties();
-		  cons.load(new FileReader("./src/main/java/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		  
 		  if(PistaDAO.comprobarExistenciaPista(track) == true) {
 			  PreparedStatement ps = connection.prepareStatement(cons.getProperty("InsertKart"));
@@ -78,7 +78,7 @@ public class KartDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
@@ -119,7 +119,7 @@ public class KartDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./src/main/java/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
