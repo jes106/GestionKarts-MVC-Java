@@ -1,7 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +34,19 @@ public class GetKartChild extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Integer> karts = KartDAO.kartListNoAssociated(1);		
-		request.setAttribute("ID", karts);
-		request.getRequestDispatcher("/Index.jsp").forward(request, response);
+
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		Iterator<Integer> iterator = karts.iterator();
+        while (iterator.hasNext()) {
+            out.print(iterator.next());
+            if (iterator.hasNext()) {
+                out.print(",");
+            }
+        }
+
+        // Cerrar el PrintWriter
+        out.close();
 	}
 }
