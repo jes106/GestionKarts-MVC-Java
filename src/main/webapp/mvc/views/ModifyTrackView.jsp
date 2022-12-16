@@ -23,7 +23,7 @@
 		<form method="post" action="/Práctica3/PostModifyTrack">
 		    <h2 id="respuesta">Espere mientras carga</h2>
 			<div class="field">
-				<label for="Nombre">ID Kart: </label>
+				<label for="Nombre">ID Pista: </label>
 				<select id="miSelect1" name="Nombre">
 				</select>
 			</div>

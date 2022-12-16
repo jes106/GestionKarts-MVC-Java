@@ -143,4 +143,73 @@ public class KartDAO {
 		return karts;
 	}
 	
+	public static ArrayList<Integer> kartList(){
+		ArrayList<Integer> karts = new ArrayList<Integer>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e2) { e2.printStackTrace(); }
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("GetAllKart"));
+		} catch (SQLException e1) { e1.printStackTrace(); }
+		
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			while(rs.next()) {
+				karts.add(rs.getInt("id"));
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		    
+		dbConnection.closeConnection();
+		
+		return karts;
+	}
+
+	public static void ModifyStateKart(int id, String state) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e2) { e2.printStackTrace(); }
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("ModifyStateKart"));
+			ps.setString(1, state);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+		} catch (SQLException e1) { e1.printStackTrace(); }
+		    
+		dbConnection.closeConnection();
+	}
 }
