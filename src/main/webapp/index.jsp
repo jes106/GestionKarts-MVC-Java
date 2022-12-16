@@ -89,6 +89,7 @@
 			<div class="botones">
 				<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 				<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar mis datos</a>
+				<a href="/Práctica3/mvc/views/ClientViews/GetReservationsWithDateIntervalView.jsp">Consultar Reservas</a>
 			</div>
 		</div>
 	
