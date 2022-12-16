@@ -24,13 +24,13 @@
 		    <h2 id="respuesta">Espere mientras carga</h2>
 			<div class="field">
 				<label for="Nombre">Nombre Pista: </label>
-				<select id="miSelect1" name="Nombre" required>
+				<select id="miSelect1" name="Nombre">
 				</select>
 			</div>
 			<br/>
 			<div class="field">
 				<label for="Nombre">ID Kart: </label>
-				<select id="miSelect2" name="Nombre" required>
+				<select id="miSelect2" name="Nombre">
 				</select>
 			</div>
 			<br />
