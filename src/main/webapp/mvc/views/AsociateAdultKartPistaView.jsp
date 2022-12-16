@@ -41,7 +41,7 @@
     <script>
     window.onload = function realizarSolicitud1() {
         // Realizar una solicitud GET al servlet
-        fetch("/Práctica3/GetTracksAdult")
+        fetch("/Práctica3/GetTracksAdults")
             .then(response => response.text()) // Obtener la respuesta como texto plano
             .then(data => {
                 // Procesar la respuesta del servlet
