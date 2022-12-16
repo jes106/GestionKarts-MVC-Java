@@ -33,11 +33,12 @@ public class GetKartAdult extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<String> tracks = PistaDAO.trackList(1);
+		ArrayList<Integer> karts = KartDAO.kartListNoAssociated(0);		
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		Iterator<String> iterator = tracks.iterator();
+		Iterator<Integer> iterator = karts.iterator();
         while (iterator.hasNext()) {
             out.print(iterator.next());
             if (iterator.hasNext()) {

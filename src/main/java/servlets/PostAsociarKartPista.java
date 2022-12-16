@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import data.dao.PistaDAO;
+
 /**
  * Servlet implementation class PostAsociarKartPista
  */
@@ -37,11 +39,12 @@ public class PostAsociarKartPista extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String track = request.getParameter("Nombre");
-		
+		int kart = Integer.parseInt(request.getParameter("ID"));
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		
-		out.println(track);
+		PistaDAO.asociarKartAPistaDisponible(kart, track);
+		
+		request.getRequestDispatcher("/index.jsp").forward(request, response);		
 	}
 
 }
