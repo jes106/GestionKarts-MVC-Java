@@ -57,7 +57,7 @@
 	   	searchParams.set('EndTime', formulario.elements.EndTime.value);
 	   	searchParams.set('Email', formulario.elements.Email.value);
 	   	  
-	   	const url = "/Práctica3/prueba?" + searchParams.toString();
+	   	const url = "/Práctica3/GetConsultarReservas?" + searchParams.toString();
 		//console.log(url);
 	   	fetch(url)
 	      .then(response => response.text())
