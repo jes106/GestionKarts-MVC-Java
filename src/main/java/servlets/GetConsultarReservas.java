@@ -49,6 +49,7 @@ public class GetConsultarReservas extends HttpServlet {
         		out.println(iterator.next() + "," + iterator.next() + "," + iterator.next() + "," + iterator.next() + "," + iterator.next() + "," 
         				+ iterator.next() + "," + iterator.next());
         	}
+        	out.println("//");
         	i++;
         }
 
