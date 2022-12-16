@@ -36,9 +36,8 @@
 	%>
 		<div class="container">
 			<div class="info">
-				<p>Estás logueado como: "Administrador"</p>
-				<p>Bienvenido <%out.println(usuario.getUsuario()); %></p>
-				<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
+				<h2>Bienvenido Administrador: <%out.println(usuario.getUsuario());%></h2>
+				<h2>Hoy es <%out.println(java.time.LocalDate.now());%></h2>
 			</div>
 		<div class="botones">
 			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
@@ -47,6 +46,8 @@
 			<a href="/Práctica3/mvc/views/altaKartView.jsp">Añadir Kart</a>
 			<a href="/Práctica3/mvc/views/altaPistaView.jsp">Añadir Pista</a>
 			<a href="/Práctica3/mvc/views/SelectTypeView.jsp">Asociar Kart-Pista</a>
+			<a href="/Práctica3/mvc/views/ModifyKartView.jsp">Modificar Kart</a>
+			<a href="/Práctica3/mvc/views/ModifyTrackView.jsp">Modificar Pista</a>
 		</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
@@ -75,9 +76,9 @@
 		<% Timestamp res = UsuarioDAO.getProximaReserva(usuario.getUsuario()); %>
 		<div class="container">
 			<div class="info">
-				<p>Bienvenido <%out.println(usuario.getUsuario()); %>!</p>
-				<p>Hoy es <%out.println(java.time.LocalDate.now()); %></p>
-				<p>Su antigüedad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %></p>
+				<h2>Bienvenido <%out.println(usuario.getUsuario()); %>!</h2>
+				<h2>Hoy es <%out.println(java.time.LocalDate.now()); %></h2>
+				<h2>Su antigüedad es de: <%out.println(UsuarioDAO.calcularAntiguedad(usuario.getUsuario())); %> años</h2>
 			</div>
 			<% if(res == null) { %>
 				<p>Su próxima reserva es el: No tiene reservas.</p>
