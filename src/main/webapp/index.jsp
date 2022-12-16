@@ -48,13 +48,14 @@
 			<a href="/Práctica3/mvc/views/SelectTypeView.jsp">Asociar Kart-Pista</a>
 			<a href="/Práctica3/mvc/views/ModifyKartView.jsp">Modificar Kart</a>
 			<a href="/Práctica3/mvc/views/ModifyTrackView.jsp">Modificar Pista</a>
+			<a href="/Práctica3/mvc/views/DeleteReservationView.jsp">Eliminar Resrva</a>
 		</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
 	  		<tr>
-	  			<th>Nombre</th>
-	    		<th>Antigüedad</th>
-	    		<th>Número de reservas</th>
+	  			<th><h2>Nombre</h2></th>
+	    		<th><h2>Antigüedad</h2></th>
+	    		<th><h2>Nº Reservas</h2></th>
 	 		</tr>
 			<% ArrayList<UsuarioDTO> users = UsuarioDAO.listarUsuarios(); 
 			ArrayList<Integer> ant = UsuarioDAO.calcularAntiguedadArray();
