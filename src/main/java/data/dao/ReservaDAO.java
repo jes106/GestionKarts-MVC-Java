@@ -795,4 +795,70 @@ public class ReservaDAO {
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }
 	}
+
+	/* Otras */
+	public static ArrayList<String> ListarReservasFuturas(){
+		ArrayList<String> res = new ArrayList<String>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e2) { e2.printStackTrace(); }
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("GetAllResFut"));
+			ps.setTimestamp(1, new Timestamp(new java.util.Date().getTime()));
+		} catch (SQLException e1) { e1.printStackTrace(); }
+		
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			while(rs.next()) {
+				res.add(rs.getString("Id"));
+				res.add(rs.getString("Email"));
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		    
+		dbConnection.closeConnection();
+		
+		return res;
+	}
+
+	public static void eliminarReserva(int id) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("DeleteReservation"));
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }
+	}
 }
