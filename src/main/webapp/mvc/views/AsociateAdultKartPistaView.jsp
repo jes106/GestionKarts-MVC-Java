@@ -29,8 +29,8 @@
 			</div>
 			<br/>
 			<div class="field">
-				<label for="Nombre">ID Kart: </label>
-				<select id="miSelect2" name="Nombre">
+				<label for="ID">ID Kart: </label>
+				<select id="miSelect2" name="ID">
 				</select>
 			</div>
 			<br />
