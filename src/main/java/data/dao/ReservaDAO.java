@@ -864,6 +864,29 @@ public class ReservaDAO {
 		} catch (SQLException e) { e.printStackTrace(); }
 	}
 
+	public static void cancelarReserva(String email, Timestamp date, String track) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("DeleteReservation"));
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }
+	}
+	
 	public static ArrayList<ArrayList<String>> listarReservaFechas(Timestamp inicio, Timestamp fin, String Email){
 		ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
 		int i = 0;
