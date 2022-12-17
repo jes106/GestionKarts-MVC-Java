@@ -5,9 +5,10 @@ import data.common.EstadoKart;
 
 public class KartMgr {
 
-	public static void addKart(int id, boolean child, EstadoKart state) {
+	public static boolean addKart(int id, boolean child, EstadoKart state) {
 		KartDTO kart = new KartDTO(id, child, state);
 		KartDAO.crearKart(kart);
+		return true;
 	}
 	
 }
