@@ -42,7 +42,17 @@
 			<br />
 			<button type="submit">Consultar Reservas</button>
 			<br />
-			<div id="output"></div>
+			<table id="output">
+				<tr>
+					<th><p>Fecha y Hora</p></th>
+					<th><p>Precio</p></th>
+					<th><p>Pista</p></th>
+					<th><p>Tipo</p></th>
+					<th><p>Menores</p></th>
+					<th><p>Adultos</p></th>
+					<th><p>Estado</p></th>
+				</tr>
+			</table>
 		</form>
 	</div>
 
@@ -62,7 +72,38 @@
 	   	fetch(url)
 	      .then(response => response.text())
 	      .then(data => {
-			  document.getElementById('output').innerHTML = data;
+	    	  const dataWithoutNewLines = data.replace(/\n/g, '');
+	    	  const rows = dataWithoutNewLines.split('//'); // dividir el texto en filas
+
+	    	/* // Crear una tabla HTML
+	    	const table = document.createElement('table'); */
+
+	    	// Para cada fila de datos...
+	    	rows.forEach(row => {
+	    	  // Dividir la fila en columnas
+	    	  const columns = row.split(',');
+
+	    	  // Crear una fila de tabla
+	    	  const tableRow = document.createElement('tr');
+
+	    	  // Para cada columna...
+	    	  columns.forEach(column => {
+	    	    // Crear una celda de tabla
+	    	    const tableCell = document.createElement('td');
+	    	    // Establecer el contenido de la celda
+	    	    const cellContent = column.replace(/\n/g, '');
+				tableCell.innerHTML = "<p>" + cellContent + "</p>";
+	    	    // Añadir la celda a la fila
+	    	    tableRow.appendChild(tableCell);
+	    	  });
+
+	    	  // Añadir la fila a la tabla
+	    	  document.getElementById('output').appendChild(tableRow);
+	    	});
+
+	    	// Añadir la tabla al documento HTML
+	    	document.getElementById('output').appendChild(table);
+			  //document.getElementById('output').innerHTML = data;
 	  	});
 	    return false;
 	  }

@@ -128,3 +128,15 @@ input[type=submit]:hover, button:hover {
   flex: 1;
   gap: 1rem;
 }
+
+th > p{
+	font-size: 0.9rem;
+	margin-bottom: 0.5rem;
+	border-bottom: 1px solid #ffffff52;
+	padding-bottom: 0.5rem;
+}
+
+td > p{
+	font-size: 0.9rem;
+	text-align: center;
+}
