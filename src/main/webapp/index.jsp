@@ -90,6 +90,7 @@
 				<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 				<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar mis datos</a>
 				<a href="/Práctica3/mvc/views/ClientViews/GetReservationsWithDateIntervalView.jsp">Consultar Reservas</a>
+			<a href="/Práctica3/mvc/views/ClientViews/MakeIndividualReservation.jsp">Reserva Individual</a>
 			</div>
 		</div>
 	
