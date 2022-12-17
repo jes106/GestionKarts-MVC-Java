@@ -3,7 +3,34 @@
   margin: 0;
 }
 
-a{	
+.botones{
+	display:flex;
+	flex-flow: row wrap;
+	gap: 2rem;
+	justify-content: center;
+	cursor: pointer;
+}
+
+a{
+	font-size:1.5rem;
+	text-decoration:none;
+	color: white;
+	background-color: #23334b;
+	border-radius: 6px;
+	padding: 1.2rem;
+	box-shadow: -2px 2px 8px 0px #0f0f0f;
+	display:inline;
+	float:right;
+	text-align:center;
+	margin-bottom: 1rem;
+}
+
+a:hover {
+	background-color: #00dcf3;
+	color: black;
+}
+
+/* a{	
 	font-size:2rem;
 	color: white;
 	background-color: #23334b;
@@ -11,7 +38,7 @@ a{
 	padding: 1.5rem;
 	box-shadow: -2px 2px 8px 0px #0f0f0f;
 	width: 15rem;
-}
+} */
 
 .animation{
 	width: 100vw;

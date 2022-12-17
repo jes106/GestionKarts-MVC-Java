@@ -397,6 +397,48 @@ public class PistaDAO {
 		return track;
   }
 
+  public static ArrayList<String> listTrackDisponible(String type, int min){
+	  ArrayList<String> track = new ArrayList<String>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e2) { e2.printStackTrace(); }
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+		  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("GetTrackDisponible"));
+			ps.setString(1, type);
+			ps.setInt(2, min);
+		} catch (SQLException e1) { e1.printStackTrace(); }
+		
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			while(rs.next()) {
+				track.add(rs.getString("Name"));
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+		    
+		dbConnection.closeConnection();
+		
+		return track;
+  }
+  
   public static void ModifyStateTrack(String name, String state) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = null;
