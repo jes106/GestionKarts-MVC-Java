@@ -37,7 +37,7 @@ public class UsuarioDAO {
 	    Connection connection = dbConnection.getConnection();
 	    
 	    Properties cons = new Properties();
-	    cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+	    cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	    
 	    PreparedStatement ps = connection.prepareStatement(cons.getProperty("InsertUser"));
 	    ps.setString(1, user.getNameSurname());
@@ -66,7 +66,7 @@ public class UsuarioDAO {
 			Connection connection = dbConnection.getConnection();
 			
 			Properties cons = new Properties();
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -116,7 +116,7 @@ public class UsuarioDAO {
 			Connection connection = dbConnection.getConnection();
 
 			Properties cons = new Properties();
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -153,7 +153,7 @@ public class UsuarioDAO {
 			Connection connection = dbConnection.getConnection();
 
 			Properties cons = new Properties();
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -195,7 +195,7 @@ public class UsuarioDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
@@ -232,7 +232,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
@@ -256,7 +256,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps;
@@ -280,7 +280,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps;
@@ -304,7 +304,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 		
 		try {
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps;
@@ -336,7 +336,7 @@ public class UsuarioDAO {
 		Properties cons = new Properties();
 	  
 		try {
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	  
 		Statement stmt = null;
@@ -384,7 +384,7 @@ public class UsuarioDAO {
 	  Properties cons = new Properties();
 	  
 	  try {
-		  cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
@@ -426,7 +426,7 @@ public class UsuarioDAO {
 		  Properties cons = new Properties();
 		  
 		  try {
-			  cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		  } catch (IOException e) { e.printStackTrace(); }
 		  
 		  PreparedStatement ps = null;
@@ -462,7 +462,7 @@ public class UsuarioDAO {
 			Connection connection = dbConnection.getConnection();
 			
 			Properties cons = new Properties();
-			cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -513,7 +513,7 @@ public class UsuarioDAO {
 		  Properties cons = new Properties();
 		  
 		  try {
-			  cons.load(new FileReader("./WEB-INF/Consultas.properties"));
+			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		  } catch (IOException e) { e.printStackTrace(); }
 		  
 		  PreparedStatement ps = null;
