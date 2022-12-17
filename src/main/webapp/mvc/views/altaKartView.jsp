@@ -18,7 +18,7 @@
 		}
 	%>
 	<div class="note-form">
-	<form method="post" action="RUTA DEL POST">
+	<form method="post" action="/Práctica3/crearkart">
 		<div class="field">
 			<label for="Tipo">Tipo de kart: </label>
 			<select name="Tipo" required>
