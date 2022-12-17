@@ -49,6 +49,7 @@
 			<a href="/Práctica3/mvc/views/ModifyKartView.jsp">Modificar Kart</a>
 			<a href="/Práctica3/mvc/views/ModifyTrackView.jsp">Modificar Pista</a>
 			<a href="/Práctica3/mvc/views/DeleteReservationView.jsp">Eliminar Resrva</a>
+			
 		</div>
 		<h2>Listado de clientes:</h2>
 		<table class="default">
