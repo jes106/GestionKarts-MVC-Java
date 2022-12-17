@@ -43,7 +43,7 @@
 			<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 			<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
-			<a href="/Práctica3/mvc/views/altaKartView.jsp">Añadir Kart</a>
+			<a href="/Práctica3/crearkart?rol=Administrador">Añadir Kart</a>
 			<a href="/Práctica3/mvc/views/altaPistaView.jsp">Añadir Pista</a>
 			<a href="/Práctica3/mvc/views/SelectTypeView.jsp">Asociar Kart-Pista</a>
 			<a href="/Práctica3/mvc/views/ModifyKartView.jsp">Modificar Kart</a>

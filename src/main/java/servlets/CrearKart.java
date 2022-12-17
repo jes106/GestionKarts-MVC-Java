@@ -16,10 +16,10 @@ public class CrearKart extends HttpServlet{
 	RequestDispatcher disp;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		String rol = (String) request.getAttribute("rol");
+		String rol = (String) request.getParameter("rol");
 		if(rol.equals("Administrador")) {
-			disp = request.getRequestDispatcher("/mvc/altaKartView.jsp");
-			disp.include(request, response);
+			disp = request.getRequestDispatcher("/mvc/views/altaKartView.jsp");
+			disp.forward(request, response);
 		}
 		else {
 			disp = request.getRequestDispatcher("error");
@@ -28,9 +28,9 @@ public class CrearKart extends HttpServlet{
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		int estado = (int) request.getAttribute("Estado");
+		String estado = (String) request.getAttribute("Estado");
 		boolean finish=false;
-		if(estado==0) {
+		if(estado.equals("Disponible")) {
 			finish=KartMgr.addKart(5, false, EstadoKart.Disponible);
 			
 		}
