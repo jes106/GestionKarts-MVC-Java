@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Eliminar reserva</title>
-<link href="../views/formStyles.css" rel="stylesheet" type="text/css">
+<link href="/Práctica3/mvc/views/formStyles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<%
@@ -40,7 +40,7 @@
             .then(response => response.text()) // Obtener la respuesta como texto plano
             .then(data => {
             	if(data == ''){
-		        	document.getElementById("noReserva").innerHTML = "No hay Pistas con estas características"
+		        	document.getElementById("noReserva").innerHTML = "No hay Reservas"
 		        }
                 // Procesar la respuesta del servlet
                 var substrings = data.split(",");
