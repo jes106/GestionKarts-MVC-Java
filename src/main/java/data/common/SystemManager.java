@@ -6,8 +6,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/***
+ * Function that control the use of the dates
+ * @author Antonio Díaz Pérez
+ *
+ */
 public class SystemManager {
-		
+	
+	/***
+	 * Convert a date in string format to SQL format
+	 * @param date_ the date in string format
+	 * @return the date in SQL format
+	 */
 	public static Timestamp StringToDateSQL(String date_) {
 		
 		DateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -20,6 +30,12 @@ public class SystemManager {
 
 		return date;
 	}
+	
+	/***
+	 * Convert a date in string format to SQL format
+	 * @param date_ the date in string format
+	 * @return the date in SQL format
+	 */
 	
 	public static Timestamp StringToDateSQL2(String date_) {
 		
@@ -34,11 +50,23 @@ public class SystemManager {
 		return date;
 	}
 	
+	/***
+	 * Function to convert a Java Date into SQL Date
+	 * @param date_ the data in Java format
+	 * @return the date in SQL format
+	 */
 	public static Timestamp DateToDateSQL(java.util.Date date_) {
 		Timestamp date = new Timestamp(date_.getTime());
 		return date;
 	}
 	
+	/***
+	 * Function to make additions with dates
+	 * @param date date to make the operations
+	 * @param min the mins to add or subtract
+	 * @param op the operation to do (addition or subtract)
+	 * @return the new date with the operation done
+	 */
 	public static Timestamp SumaRestaFecha(Timestamp date, int min, String op){
 		
 		DateFormat formateador = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

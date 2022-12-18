@@ -3,9 +3,16 @@ package data.common.reservationfactory;
 import data.dao.ReservaDAO;
 import data.common.reservationtypes.*;
 
+/***
+ * The reservation factory for bonus reservations
+ * @author Jesús Escribano Serena
+ *
+ */
 public class ConcreteBonusReservationFactory extends ReservationAbstractFactory{
 	
-
+	/***
+	 * Function to create a bonus child reservation
+	 */
 	public ChildReservation createChildReservation(ChildReservation child){
 		ReservaDAO reservaDAO = new ReservaDAO();
 		if(child.getbonusNumber() != -1) {
@@ -19,7 +26,9 @@ public class ConcreteBonusReservationFactory extends ReservationAbstractFactory{
 		return child;
 	}
 
-
+	/***
+	 * Function to create a bonus adult reservation
+	 */
 	public AdultsReservation createAdultsReservation(AdultsReservation adult){
 		ReservaDAO reservaDAO = new ReservaDAO();
 		if(adult.getbonusNumber() != -1) {
@@ -33,7 +42,9 @@ public class ConcreteBonusReservationFactory extends ReservationAbstractFactory{
 		return adult;
 	}
 
-
+	/***
+	 * Function to create a bonus familiar reservation
+	 */
 	public FamiliarReservation createFamiliarReservation(FamiliarReservation fam){
 		
 		ReservaDAO reservaDAO = new ReservaDAO();

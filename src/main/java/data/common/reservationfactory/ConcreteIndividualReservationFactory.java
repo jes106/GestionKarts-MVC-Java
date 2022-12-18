@@ -3,9 +3,16 @@ package data.common.reservationfactory;
 import data.dao.ReservaDAO;
 import data.common.reservationtypes.*;
 
-
+/***
+ * The reservation factory for individual reservation
+ * @author Jesús Escribano Serena
+ *
+ */
 public class ConcreteIndividualReservationFactory extends ReservationAbstractFactory{
 
+	/***
+	 * Function to create an individual child reservation
+	 */
 	@Override
 	public ChildReservation createChildReservation(ChildReservation child){
 		ReservaDAO reservaDAO = new ReservaDAO();
@@ -20,6 +27,9 @@ public class ConcreteIndividualReservationFactory extends ReservationAbstractFac
 		return child;
 	}
 
+	/***
+	 * Function to create an individual adults reservation
+	 */
 	@Override
 	public AdultsReservation createAdultsReservation(AdultsReservation adult){
 		ReservaDAO reservaDAO = new ReservaDAO();
@@ -34,6 +44,9 @@ public class ConcreteIndividualReservationFactory extends ReservationAbstractFac
 		return adult;
 	}
 
+	/***
+	 * Function to create an individual familiar reservation
+	 */
 	@Override
 	public FamiliarReservation createFamiliarReservation(FamiliarReservation fam){
 		

@@ -18,6 +18,12 @@ public class DBConnection {
 	
 	protected Connection connection = null;
 	
+	/***
+	 * Function to connect to the database
+	 * @return The pipe with the database
+	 * @throws FileNotFoundException If the file with the properties is not found
+	 * @throws IOException If there are any problems with the I/O
+	 */
 	public Connection getConnection() throws FileNotFoundException, IOException{
 		
 		// Open the properties file
@@ -39,7 +45,9 @@ public class DBConnection {
 		return this.connection;
 	}
 
-
+	/***
+	 * Function to close the conection with the database
+	 */
 	public void closeConnection() {
 		try {
 			if(this.connection != null && !this.connection.isClosed()) {

@@ -42,6 +42,7 @@ public class KartDTO {
 	/* Getters y Setters for all the variables */
 	
 	/**
+	 * Give the id of a car
 	 * @return The id of the kart
 	 */
 	public int getId() {
@@ -57,6 +58,7 @@ public class KartDTO {
 	}
 	
 	/**
+	 * Give you if the kart is for children
 	 * @return True if the kart is intended for children, false if for adults.
 	 */
 	public boolean getChild() {
@@ -72,6 +74,7 @@ public class KartDTO {
 	}
 	
 	/**	
+	 * Give you the status of the kart
 	 * @return The status of the kart
 	 */
 	public EstadoKart getEstado() {
