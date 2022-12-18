@@ -48,7 +48,7 @@
 			<a href="/Práctica3/mvc/views/SelectTypeView.jsp">Asociar Kart-Pista</a>
 			<a href="/Práctica3/mvc/views/ModifyKartView.jsp">Modificar Kart</a>
 			<a href="/Práctica3/mvc/views/ModifyTrackView.jsp">Modificar Pista</a>
-			<a href="/Práctica3/mvc/views/DeleteReservationView.jsp">Eliminar Resrva</a>
+			<a href="/Práctica3/mvc/views/DeleteReservationView.jsp">Eliminar Reserva</a>
 			
 		</div>
 		<h2>Listado de clientes:</h2>
@@ -91,7 +91,8 @@
 				<a href="/Práctica3/mvc/controllers/disconnectController.jsp">Desconectar</a>
 				<a href="/Práctica3/mvc/views/ModifyClientView.jsp">Modificar mis datos</a>
 				<a href="/Práctica3/mvc/views/ClientViews/GetReservationsWithDateIntervalView.jsp">Consultar Reservas</a>
-			<a href="/Práctica3/mvc/views/ClientViews/MakeIndividualReservation.jsp">Reserva Individual</a>
+				<a href="/Práctica3/mvc/views/ClientViews/MakeIndividualReservation.jsp">Reserva Individual</a>
+				<a href="/Práctica3/mvc/views/ClientViews/MenuBonoView.jsp">Reserva con Bono</a>
 			</div>
 		</div>
 	
