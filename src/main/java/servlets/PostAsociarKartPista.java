@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ import data.dao.PistaDAO;
 @WebServlet("/PostAsociarKartPista")
 public class PostAsociarKartPista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	RequestDispatcher disp;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,7 +33,19 @@ public class PostAsociarKartPista extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String rol=(String) request.getParameter("rol");
+		if(rol==null) {
+			disp = request.getRequestDispatcher("/mvc/views/ERROR.jsp");
+			disp.forward(request, response);
+		}
+		else if(rol.equals("Administrador")){
+			disp = request.getRequestDispatcher("/mvc/views/SelectTypeView.jsp");
+			disp.include(request, response);
+		}
+		else {
+			disp = request.getRequestDispatcher("/mvc/views/error.jsp");
+			disp.forward(request, response);
+		}
 	}
 
 	/**

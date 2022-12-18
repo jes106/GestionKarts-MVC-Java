@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -17,7 +19,11 @@ public class CrearKart extends HttpServlet{
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		String rol = (String) request.getParameter("rol");
-		if(rol.equals("Administrador")) {
+		if(rol==null) {
+			disp = request.getRequestDispatcher("error");
+			disp.forward(request, response);
+		}
+		else if(rol.equals("Administrador")) {
 			disp = request.getRequestDispatcher("/mvc/views/altaKartView.jsp");
 			disp.forward(request, response);
 		}
@@ -25,22 +31,35 @@ public class CrearKart extends HttpServlet{
 			disp = request.getRequestDispatcher("error");
 			disp.forward(request, response);
 		}
+
 	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		String estado = (String) request.getAttribute("Estado");
-		boolean finish=false;
+		String estado = (String) request.getParameter("Estado");
+		String tipo = (String) request.getParameter("Tipo");
+		EstadoKart state=null;
+		boolean child=false;
 		if(estado.equals("Disponible")) {
-			finish=KartMgr.addKart(5, false, EstadoKart.Disponible);
-			
+			state=EstadoKart.Disponible;
 		}
-		else if(estado==1){
-			finish=KartMgr.addKart(5, true, EstadoKart.Disponible);
+		else if(estado.equals("Mantenimiento")) {
+			state=EstadoKart.Mantenimiento;
+		}
+		else if(estado.equals("Reservado")) {
+			state=EstadoKart.Reservado;
 		}
 		
-		if(finish==true) {
+		if(tipo.equals("Child")) {
+			child=true;
+		}
+		
+		
+		if(KartMgr.addKart(66, child, state)==true) {
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<br><h2>Kart creado correctamente</h2>");
 			disp = request.getRequestDispatcher("/index.jsp");
-			disp.forward(request, response);
+			disp.include(request, response);
 		}
 		else {
 			disp = request.getRequestDispatcher("error");
