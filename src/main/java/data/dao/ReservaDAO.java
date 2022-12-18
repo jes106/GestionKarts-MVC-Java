@@ -863,29 +863,6 @@ public class ReservaDAO {
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }
 	}
-
-	public static void cancelarReserva(String email, Timestamp date, String track) {
-		DBConnection dbConnection = new DBConnection();
-		Connection connection = null;
-		
-		try {
-			connection = dbConnection.getConnection();
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
-		PreparedStatement ps = null;
-		
-		try {
-			ps = connection.prepareStatement(cons.getProperty("DeleteReservation"));
-			ps.setInt(1, id);
-			ps.executeUpdate();
-		} catch (SQLException e) { e.printStackTrace(); }
-	}
 	
 	public static ArrayList<ArrayList<String>> listarReservaFechas(Timestamp inicio, Timestamp fin, String Email){
 		ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
@@ -935,6 +912,83 @@ public class ReservaDAO {
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
 		    
+		dbConnection.closeConnection();
+		
+		return res;
+	}
+
+	public static boolean CompruebaBono(String email, String type) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+	    
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+	  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("CheckBono"));
+			ps.setString(1, email);
+			ps.setString(2, type);
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		dbConnection.closeConnection();
+		return false;
+	}
+
+	public static ArrayList<ArrayList<String>> listReservasModificables(String email){
+		ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+	    
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+	  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("CheckReservationMod"));
+			ps.setString(1, email);
+			ps.setTimestamp(2, SystemManager.SumaRestaFecha(new Timestamp(new java.util.Date().getTime()), 1440, "s"));
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			if(rs.next()) {
+				ArrayList<String> var = new ArrayList<String>();
+				var.add(String.valueOf(rs.getInt("Id")));
+				var.add(rs.getString("Track"));
+				var.add(rs.getString("Date"));
+				res.add(var);
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+
 		dbConnection.closeConnection();
 		
 		return res;
