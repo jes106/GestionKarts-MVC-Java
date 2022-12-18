@@ -55,6 +55,7 @@
 	<div class="note-form">
 		<form method="post" action="/Práctica3/PostReservaIndividual">
 		    <h2 id="respuesta">Esperando que pida las pistas...</h2>
+		    <div id="noPistas" style="color:red;"></div>
 			<div class="field">
 				<select id="miSelect1" name="Nombre">
 				</select>
@@ -107,6 +108,9 @@
 	   	fetch(url)
 	      .then(response => response.text())
 	      .then(data => {
+	    	  if(data == ''){
+		        	document.getElementById("noPistas").innerHTML = "No hay Pistas con estas características"
+		        }
 	    	// Procesar la respuesta del servlet
               var substrings = data.split(",");
 	                

@@ -22,6 +22,7 @@
 	<div class="note-form">
 		<form method="post" action="/Práctica3/PostDeleteReservation">
 		    <h2 id="respuesta">Espere mientras carga</h2>
+		    <div id="noReserva" style="color:red;"></div>
 			<div class="field">
 				<label for="ID">ID de Reserva: </label>
 				<select id="miSelect1" name="ID">
@@ -38,6 +39,9 @@
         fetch("/Práctica3/GetReservas")
             .then(response => response.text()) // Obtener la respuesta como texto plano
             .then(data => {
+            	if(data == ''){
+		        	document.getElementById("noReserva").innerHTML = "No hay Pistas con estas características"
+		        }
                 // Procesar la respuesta del servlet
                 var substrings = data.split(",");
 	                
