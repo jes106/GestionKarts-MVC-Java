@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.common.SystemManager;
 import data.dao.PistaDAO;
+import data.dao.ReservaDAO;
 
 /**
  * Servlet implementation class GetPistasDisponibles
@@ -40,16 +41,20 @@ public class GetPistasDisponibles extends HttpServlet {
 		int min = Integer.parseInt(request.getParameter("Min"));
 		
 		ArrayList<String> track = PistaDAO.listTrackDisponible(type, min);
+		ArrayList<String> track_ = new ArrayList<String>();
+		for(String iterator_:track) {
+			if(ReservaDAO.CompruebaFechaReserva(date, 120, iterator_) == true) { track_.add(iterator_); }
+		}
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		Iterator<String> iterator = track.iterator();
+		Iterator<String> iterator = track_.iterator();
         while (iterator.hasNext()) {
-            out.print(iterator.next());
+    		out.print(iterator.next());
             if (iterator.hasNext()) {
                 out.print(",");
-            }
+            }            
         }
 	}
 }
