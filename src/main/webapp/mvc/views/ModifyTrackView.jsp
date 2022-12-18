@@ -22,6 +22,7 @@
 	<div class="note-form">
 		<form method="post" action="/Práctica3/PostModifyTrack">
 		    <h2 id="respuesta">Espere mientras carga</h2>
+		    <div id="noPistas" style="color:red;"></div>
 			<div class="field">
 				<label for="Nombre">ID Pista: </label>
 				<select id="miSelect1" name="Nombre">
@@ -46,6 +47,9 @@
         fetch("/Práctica3/GetTracks")
             .then(response => response.text()) // Obtener la respuesta como texto plano
             .then(data => {
+            	if(data == ''){
+		        	document.getElementById("noPistas").innerHTML = "No hay Pistas con estas características"
+		        }
                 // Procesar la respuesta del servlet
                 var substrings = data.split(",");
 	                

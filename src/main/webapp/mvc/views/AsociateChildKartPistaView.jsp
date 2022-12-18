@@ -22,12 +22,14 @@
 	<div class="note-form">
 		<form method="post" action="/Práctica3/PostAsociarKartPista">
 		    <h2 id="respuesta">Espere mientras carga</h2>
+		    <div id="noPistas" style="color:red;"></div>
 			<div class="field">
 				<label for="Nombre">Nombre Pista: </label>
 				<select id="miSelect1" name="Nombre">
 				</select>
 			</div>
 			<br/>
+			<div id="noKarts" style="color:red;"></div>
 			<div class="field">
 				<label for="ID">ID Kart: </label>
 				<select id="miSelect2" name="ID">
@@ -44,6 +46,9 @@
         fetch("/Práctica3/GetTracksChild")
             .then(response => response.text()) // Obtener la respuesta como texto plano
             .then(data => {
+            	if(data == ''){
+		        	document.getElementById("noPistas").innerHTML = "No hay Pistas con estas características"
+		        }
                 // Procesar la respuesta del servlet
                 var substrings = data.split(",");
 	                
@@ -67,6 +72,9 @@
         fetch("/Práctica3/GetKartChild")
             .then(response => response.text()) // Obtener la respuesta como texto plano
             .then(data => {
+            	if(data == ''){
+		        	document.getElementById("noKarts").innerHTML = "No hay Pistas con estas características"
+		        }
                 // Procesar la respuesta del servlet
                 var substrings = data.split(",");
 	                

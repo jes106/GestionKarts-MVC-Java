@@ -53,6 +53,7 @@
 					<th><p>Estado</p></th>
 				</tr>
 			</table>
+			<div id="noReservas" style="color:red;"></div>
 		</form>
 	</div>
 
@@ -72,6 +73,10 @@
 	   	fetch(url)
 	      .then(response => response.text())
 	      .then(data => {
+	    	  if(data == ''){
+		        	document.getElementById("noReservas").innerHTML = "No hay Pistas con estas características"
+		        }
+	    	  
 	    	  const dataWithoutNewLines = data.replace(/\n/g, '');
 	    	  const rows = dataWithoutNewLines.split('//'); // dividir el texto en filas
 

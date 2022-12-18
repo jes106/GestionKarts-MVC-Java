@@ -56,7 +56,7 @@
             		document.getElementById("noReservas").innerHTML = "No tienes reservas con más de 24 horas de antelación"
             	}
                 // Procesar la respuesta del servlet
-                var substrings = data.split(",");
+                var substrings = data.split("//");
 				// Obtener una referencia al select del formulario con un ID de "miSelect"
 				var miSelect1 = document.getElementById("miSelect1");
 			
