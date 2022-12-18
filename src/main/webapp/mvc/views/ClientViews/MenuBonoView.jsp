@@ -56,12 +56,14 @@
 	</div>
 	
 	<div class="note-form">
-		<form method="post" action="/Práctica3/PostReservaBono">
+		<form method="post" action="/Práctica3/PostReservaIndividual">
 		    <h2 id="respuesta">Esperando que pida las pistas...</h2>
 			<div class="field">
 				<select id="miSelect1" name="Nombre">
 				</select>
 			</div>
+			<p id="visibles">
+			</p>
 			<p id="ocultos" style="display:none;">
 			</p>
 			<input type="text" readonly name="Bono" value="true" style="display:none;">
@@ -78,7 +80,7 @@
 	  function Infantil() {
 		//muestro el boton que envia un formulario oculto con los datos para la ceracion del bono
 		document.getElementById("bono").innerHTML = '<form id="miFormulario" method="post" action="/Práctica3/PostCrearBono">' + 
-		'<input type="text" readonly name="Tipo" value="infantil" style="display:none;">' + 
+		'<input type="text" readonly name="Tipo" value="Infantil" style="display:none;">' + 
 		'<input type="text" readonly name="Email" value=<%= usuario.getUsuario() %> style="display:none;">' + 
 		'<input type="submit" value="Nuevo Bono infantil"> </form>';
 	   	
@@ -97,7 +99,7 @@
 	    	  //const data = "true";
 	    	  
 	    	  if ("true" == "true"){
-	    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono infantil</button></form><br>';
+	    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Infantil</button></form><br>';
 	    	  }
 	    	  else{
 	    		  ocultar();
@@ -110,7 +112,7 @@
 	  function Familiar() {
 			//muestro el boton que envia un formulario oculto con los datos para la ceracion del bono
 			document.getElementById("bono").innerHTML = '<form id="miFormulario" method="post" action="/Práctica3/PostCrearBono">' + 
-			'<input type="text" readonly name="Tipo" value="familiar" style="display:none;">' + 
+			'<input type="text" readonly name="Tipo" value="Familiar" style="display:none;">' + 
 			'<input type="text" readonly name="Email" value=<%= usuario.getUsuario() %> style="display:none;">' + 
 			'<input type="submit" value="Nuevo Bono familiar"> </form>';
 		   	
@@ -129,7 +131,7 @@
 		    	  //const data = "true";
 		    	  
 		    	  if (data == "true"){
-		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono infantil</button></form><br>';
+		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Familiar</button></form><br>';
 		    	  }
 		    	  else{
 		    		  ocultar();
@@ -142,7 +144,7 @@
 	  function Adulto() {
 			//muestro el boton que envia un formulario oculto con los datos para la ceracion del bono
 			document.getElementById("bono").innerHTML = '<form id="miFormulario" method="post" action="/Práctica3/PostCrearBono">' + 
-			'<input type="text" readonly name="Tipo" value="infantil" style="display:none;">' + 
+			'<input type="text" readonly name="Tipo" value="Adulto" style="display:none;">' + 
 			'<input type="text" readonly name="Email" value=<%= usuario.getUsuario() %> style="display:none;">' + 
 			'<input type="submit" value="Nuevo Bono adulto"> </form>';
 		   	
@@ -161,7 +163,7 @@
 		    	  //const data = "true";
 		    	  
 		    	  if (data == "true"){
-		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono infantil</button></form><br>';
+		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Adulto</button></form><br>';
 		    	  }
 		    	  else{
 		    		  ocultar();
@@ -200,7 +202,23 @@
 		    '<input type="text" readonly name="Min" value="' + formulario.elements.Min.value + '">' + 
 		    '<input type="text" readonly name="Email" value="' + formulario.elements.Email.value + '">';
 		    document.getElementById('ocultos').innerHTML = ParametrosOcultos;
-		   	  
+		   	
+		    
+		    var ParametrosVisibles = '<div class="field"><label for="Duracion">Duración de la reserva: </label><input type="number" name="Duracion" required></div><br>';
+			
+		    if(dificultad.elements.Tipo.value == 'Infantil'){
+		    	ParametrosVisibles = ParametrosVisibles + '<div class="field"><label for="Child">Numero de menores: </label><input type="number" name="Child" value="" required></div>';
+		    }
+		    else if(dificultad.elements.Tipo.value == 'Familiar'){
+		    	ParametrosVisibles = ParametrosVisibles + '<div class="field"><label for="Child">Numero de menores: </label><input type="number" name="Child" value="" required></div><br>' +
+		    	'<div class="field"><label for="Adult">Numero de adultos: </label><input type="number" name="Adult" value="" required></div>';
+		    }
+		    else{
+		    	ParametrosVisibles = ParametrosVisibles + '<div class="field"><label for="Adult">Numero de adultos: </label><input type="number" name="Adult" value="" required></div>';
+		    }
+		    document.getElementById('visibles').innerHTML = ParametrosVisibles;
+		    
+		    
 		   	const url = "/Práctica3/GetPistasDisponibles?" + searchParams.toString();
 			//console.log(url);
 		   	fetch(url)

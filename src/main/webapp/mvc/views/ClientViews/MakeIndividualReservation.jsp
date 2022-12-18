@@ -59,8 +59,12 @@
 				<select id="miSelect1" name="Nombre">
 				</select>
 			</div>
+			<br/>
+			<p id="visibles">
+			</p>
 			<p id="ocultos" style="display:none;">
 			</p>
+			<input type="text" readonly name="Bono" value="false" style="display:none;">
 			<input type="submit" value="Reservar">
 		</form>
 	</div>
@@ -79,9 +83,24 @@
 	   	var ParametrosOcultos = '<input type="text" readonly name="Tipo" value="' + formulario.elements.Tipo.value + '">' + 
 	    '<input type="text" readonly name="Date" value="' + formulario.elements.Date.value + '">' + 
 	    '<input type="text" readonly name="Time" value="' + formulario.elements.Time.value + '">' + 
-	    '<input type="text" readonly name="Min" value="' + formulario.elements.Min.value + '">' + 
 	    '<input type="text" readonly name="Email" value="' + formulario.elements.Email.value + '">';
 	    document.getElementById('ocultos').innerHTML = ParametrosOcultos;
+	    
+	    var ParametrosVisibles = '<div class="field"><label for="Duracion">Duración de la reserva: </label><input type="number" name="Duracion" required></div><br>';
+			
+	    if(formulario.elements.Tipo.value == 'Infantil'){
+	    	ParametrosVisibles = ParametrosVisibles + '<div class="field"><label for="Child">Numero de menores: </label><input type="number" name="Child" value="" required></div>';
+	    }
+	    else if(formulario.elements.Tipo.value == 'Familiar'){
+	    	ParametrosVisibles = ParametrosVisibles + '<div class="field"><label for="Child">Numero de menores: </label><input type="number" name="Child" value="" required></div><br>' +
+	    	'<div class="field"><label for="Adult">Numero de adultos: </label><input type="number" name="Adult" value="" required></div>';
+	    }
+	    else{
+	    	ParametrosVisibles = ParametrosVisibles + '<div class="field"><label for="Adult">Numero de adultos: </label><input type="number" name="Adult" value="" required></div>';
+	    }
+	    document.getElementById('visibles').innerHTML = ParametrosVisibles;
+	    
+	    
 	   	  
 	   	const url = "/Práctica3/GetPistasDisponibles?" + searchParams.toString();
 		//console.log(url);
