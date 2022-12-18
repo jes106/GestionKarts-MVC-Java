@@ -28,7 +28,8 @@
 		<a href="#" onclick="Familiar()">Familiar</a>
 		<a href="#" onclick="Adulto()">Adulto</a>
 	</div>
-	<div id="reservar">
+
+	<div id="bono">
 	</div>
 	
 	<div id="visibilidad" style="display:none;">
@@ -56,7 +57,7 @@
 	</div>
 	
 	<div class="note-form">
-		<form method="post" action="/Práctica3/PostReservaIndividual">
+		<form method="post" action="/Práctica3/PostReservarConNuevoBono">
 		    <h2 id="respuesta">Esperando que pida las pistas...</h2>
 			<div class="field">
 				<select id="miSelect1" name="Nombre">
@@ -67,121 +68,56 @@
 			<p id="ocultos" style="display:none;">
 			</p>
 			<input type="text" readonly name="Bono" value="true" style="display:none;">
-			<input type="submit" value="Reservar">
+			<input type="submit" value="Crear Bono y Reservar">
 		</form>
 	</div>
 	</div>
 	
-	<div id="bono">
-	</div>
 	
 
 	<script>
 	  function Infantil() {
+			if(document.getElementById("visibilidad").style.display == ""){
+				ocultar();	
+			}
 		//muestro el boton que envia un formulario oculto con los datos para la ceracion del bono
-		document.getElementById("bono").innerHTML = '<form id="miFormulario" method="" action="/Práctica3/mvc/views/ClientViews/ReservarConNuevoBonoView.jsp">' + 
+		document.getElementById("bono").innerHTML = '<form id="miFormulario" method="" action="">' + 
 		'<input type="text" readonly name="Tipo" value="Infantil" style="display:none;">' + 
 		'<input type="text" readonly name="Email" value=<%= usuario.getUsuario() %> style="display:none;">' + 
-		'<input type="submit" value="Nuevo Bono infantil"> </form>';
-	   	
-		//recojo esos datos para hacer una peticion get por si el usuario ya tiene un bono y quiere usarlo
-		const formulario = document.getElementById('miFormulario');
-	   	
-	   	const searchParams = new URLSearchParams();
-	   	searchParams.set('Tipo', formulario.elements.Tipo.value);
-	   	searchParams.set('Email', formulario.elements.Email.value);
-			   	  
-	   	const url = "/Práctica3/GetTieneBono?" + searchParams.toString();
-		//console.log(url);
-	   	fetch(url)
-	      .then(response => response.text())
-	      .then(data => { 
-	    	  //const data = "true";
-	    	  
-	    	  if (data == "true"){
-	    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Infantil</button></form><br>';
-	    	  }
-	    	  else{
-	    		  ocultar();
-	    			document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos infantiles</p><br>';
-	    	  }
-	    	
-	  	});
+		'<button href="#" onclick="visibilidad()">Crear Bono Infantil y Reservar</button></form>';	
 	    return false;
 	  }
 	  function Familiar() {
+			if(document.getElementById("visibilidad").style.display == ""){
+				ocultar();	
+			}
 			//muestro el boton que envia un formulario oculto con los datos para la ceracion del bono
-			document.getElementById("bono").innerHTML = '<form id="miFormulario" method="" action="/Práctica3/mvc/views/ClientViews/ReservarConNuevoBonoView.jsp">' + 
+			document.getElementById("bono").innerHTML = '<form id="miFormulario" method="" action="">' + 
 			'<input type="text" readonly name="Tipo" value="Familiar" style="display:none;">' + 
 			'<input type="text" readonly name="Email" value=<%= usuario.getUsuario() %> style="display:none;">' + 
-			'<input type="submit" value="Nuevo Bono familiar"> </form>';
-		   	
-			//recojo esos datos para hacer una peticion get por si el usuario ya tiene un bono y quiere usarlo
-			const formulario = document.getElementById('miFormulario');
-		   	
-		   	const searchParams = new URLSearchParams();
-		   	searchParams.set('Tipo', formulario.elements.Tipo.value);
-		   	searchParams.set('Email', formulario.elements.Email.value);
-				   	  
-		   	const url = "/Práctica3/GetTieneBono?" + searchParams.toString();
-			//console.log(url);
-		   	fetch(url)
-		      .then(response => response.text())
-		      .then(data => { 
-		    	  //const data = "true";
-		    	  
-		    	  if (data == "true"){
-		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Familiar</button></form><br>';
-		    	  }
-		    	  else{
-		    		  ocultar();
-		    			document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos familiares</p><br>';
-		    	  }
-		    	
-		  	});
+			'<button href="#" onclick="visibilidad()">Crear Bono Familiar y Reservar</button></form>';	
 		    return false;
 		  }
 	  function Adulto() {
+			if(document.getElementById("visibilidad").style.display == ""){
+				ocultar();	
+			}
 			//muestro el boton que envia un formulario oculto con los datos para la ceracion del bono
-			document.getElementById("bono").innerHTML = '<form id="miFormulario" method="" action="/Práctica3/mvc/views/ClientViews/ReservarConNuevoBonoView.jsp">' + 
+			document.getElementById("bono").innerHTML = '<form id="miFormulario" method="" action="">' + 
 			'<input type="text" readonly name="Tipo" value="Adulto" style="display:none;">' + 
 			'<input type="text" readonly name="Email" value=<%= usuario.getUsuario() %> style="display:none;">' + 
-			'<input type="submit" value="Nuevo Bono adulto"> </form>';
-		   	
-			//recojo esos datos para hacer una peticion get por si el usuario ya tiene un bono y quiere usarlo
-			const formulario = document.getElementById('miFormulario');
-		   	
-		   	const searchParams = new URLSearchParams();
-		   	searchParams.set('Tipo', formulario.elements.Tipo.value);
-		   	searchParams.set('Email', formulario.elements.Email.value);
-				   	  
-		   	const url = "/Práctica3/GetTieneBono?" + searchParams.toString();
-			//console.log(url);
-		   	fetch(url)
-		      .then(response => response.text())
-		      .then(data => { 
-		    	  //const data = "true";
-		    	  
-		    	  if (data == "true"){
-		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Adulto</button></form><br>';
-		    	  }
-		    	  else{
-		    		  ocultar();
-		    			document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos adultos</p><br>';
-		    	  }
-		    	
-		  	});
+			'<button href="#" onclick="visibilidad()">Crear Bono Adulto y Reservar</button></form>';
 		    return false;
 		  }
 	  
 	  function visibilidad() {
 		  	document.getElementById("visibilidad").style.display = "";
-		  	document.getElementById("reservar").style.display = "none";	
+		  	document.getElementById("bono").style.display = "none";	
 	  }
 	  
 	  function ocultar() {
 		  	document.getElementById("visibilidad").style.display = "none";
-		  	document.getElementById("reservar").style.display = "";	
+		  	document.getElementById("bono").style.display = "";	
 	  }
 	  
 	  
