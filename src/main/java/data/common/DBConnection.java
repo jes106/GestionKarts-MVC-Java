@@ -8,6 +8,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 /**
  * A class to manage the MySQL connection (general methods and configuration).
  * @author Antonio Diaz Perez
@@ -29,10 +33,26 @@ public class DBConnection {
 		// Open the properties file
 		Properties propiedades = new Properties();
 		propiedades.load(new FileReader("./src/main/java/data/common/config.properties"));
-
+	    Context ctx;
+	    String url=null;
+	    String user=null;
+	    String pass=null;
+	    
+		try {
+			ctx = new InitialContext();
+			Context env = (Context) ctx.lookup("java:comp/env");
+			url = (String) env.lookup("URL");
+			user = (String) env.lookup("User");
+			pass = (String) env.lookup("Password");
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    
+	    
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = (Connection) DriverManager.getConnection(propiedades.getProperty("URL"), propiedades.getProperty("User"), propiedades.getProperty("Password"));
+			this.connection = (Connection) DriverManager.getConnection("jdbc:mysql://oraclepr.uco.es:3306/i02dipea", "i02dipea", "BDPW");
 			System.out.println("Database connection successfully opened!");
 		} 
 		catch (SQLException e) {
