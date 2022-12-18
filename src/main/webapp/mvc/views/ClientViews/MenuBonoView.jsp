@@ -95,19 +95,17 @@
 	   	const url = "/Práctica3/GetTieneBono?" + searchParams.toString();
 		//console.log(url);
 	   	fetch(url)
-	      .then(response => response.text())
-	      .then(data => { 
-	    	  //const data = "true";
-	    	  
-	    	  if (data == "true"){
-	    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Infantil</button></form><br>';
-	    	  }
-	    	  else{
-	    		  ocultar();
-	    			document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos infantiles</p><br>';
-	    	  }
-	    	
-	  	});
+		      .then(response => response.json())
+	      	  .then(data => {
+	    	  	  console.log(data);
+		    	  const resultado = data.toString();
+		    	    if (resultado == "true") {
+		    	    	document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Infantil</button></form><br>';
+		    	    } else {
+		    	    	ocultar();
+		    	    	document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos Infantiles</p><br>';
+		    	    }
+		  	});
 	    return false;
 	  }
 	  function Familiar() {
@@ -127,18 +125,16 @@
 		   	const url = "/Práctica3/GetTieneBono?" + searchParams.toString();
 			//console.log(url);
 		   	fetch(url)
-		      .then(response => response.text())
-		      .then(data => { 
-		    	  //const data = "true";
-		    	  
-		    	  if (data == "true"){
-		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Familiar</button></form><br>';
-		    	  }
-		    	  else{
-		    		  ocultar();
-		    			document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos familiares</p><br>';
-		    	  }
-		    	
+		      .then(response => response.json())
+	      	  .then(data => {
+	    	  	  console.log(data);
+		    	  const resultado = data.toString();
+		    	    if (resultado == "true") {
+		    	    	document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Familiar</button></form><br>';
+		    	    } else {
+		    	    	ocultar();
+		    	    	document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos Familiares</p><br>';
+		    	    }
 		  	});
 		    return false;
 		  }
@@ -159,18 +155,16 @@
 		   	const url = "/Práctica3/GetTieneBono?" + searchParams.toString();
 			//console.log(url);
 		   	fetch(url)
-		      .then(response => response.text())
-		      .then(data => { 
-		    	  //const data = "true";
-		    	  
-		    	  if (data == "true"){
-		    			document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Adulto</button></form><br>';
-		    	  }
-		    	  else{
-		    		  ocultar();
-		    			document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos adultos</p><br>';
-		    	  }
-		    	
+		      .then(response => response.json())
+	      	  .then(data => {
+	    	  	  console.log(data);
+		    	  const resultado = data.toString();
+		    	    if (resultado == "true") {
+		    	    	document.getElementById("reservar").innerHTML = '<form><button href="#" onclick="visibilidad()">Reservar con tu Bono Adulto</button></form><br>';
+		    	    } else {
+		    	    	ocultar();
+		    	    	document.getElementById("reservar").innerHTML = '<p class="botones" href="#">No tienes bonos Adultos</p><br>';
+		    	    }
 		  	});
 		    return false;
 		  }
