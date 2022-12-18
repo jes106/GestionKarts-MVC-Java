@@ -43,8 +43,10 @@ public class GetReservasUsuarioModificables extends HttpServlet {
 		while (i < reservas.size()) {
         	Iterator<String> iterator = reservas.get(i).iterator();
         	while(iterator.hasNext()) {
-        		out.println(iterator.next() + "," + iterator.next() + "," + iterator.next() + "," + iterator.next() + "," + iterator.next() + "," 
-        				+ iterator.next() + "," + iterator.next());
+        		out.println(iterator.next());
+        		if(iterator.hasNext()) {
+        			out.println("  -  ");
+        		}
         	}
         	out.println("//");
         	i++;
