@@ -10,8 +10,8 @@ import javax.servlet.http.*;
 import business.KartMgr;
 import data.common.EstadoKart;
 
-@WebServlet(name="ejemplo", urlPatterns="/ejemplo")
-public class ServletEjemploRedireccion extends HttpServlet{
+@WebServlet(name="ManejadorModifyKart", urlPatterns="/ManejadorModifyKart")
+public class ManejadorModifyKart extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -24,7 +24,7 @@ public class ServletEjemploRedireccion extends HttpServlet{
 			disp.forward(request, response);
 		}
 		else if(rol.equals("Administrador")) {
-			disp = request.getRequestDispatcher("/mvc/views/altaKartView.jsp");
+			disp = request.getRequestDispatcher("/mvc/views/ModifyKartView.jsp");
 			disp.forward(request, response);
 		}
 		else {
@@ -33,4 +33,5 @@ public class ServletEjemploRedireccion extends HttpServlet{
 		}
 
 	}
+	
 }
