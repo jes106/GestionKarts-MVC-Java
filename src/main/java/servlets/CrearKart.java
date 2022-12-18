@@ -20,7 +20,7 @@ public class CrearKart extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		String rol = (String) request.getParameter("rol");
 		if(rol==null) {
-			disp = request.getRequestDispatcher("error");
+			disp = request.getRequestDispatcher("/mvc/views/Error/ErrorView.jsp");
 			disp.forward(request, response);
 		}
 		else if(rol.equals("Administrador")) {
@@ -28,7 +28,7 @@ public class CrearKart extends HttpServlet{
 			disp.forward(request, response);
 		}
 		else {
-			disp = request.getRequestDispatcher("error");
+			disp = request.getRequestDispatcher("/mvc/views/Error/ErrorView.jsp");
 			disp.forward(request, response);
 		}
 

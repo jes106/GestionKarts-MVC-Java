@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Añadir un kart</title>
+<title>No tines permisos</title>
 <link href="/Práctica3/mvc/views/Error/error.css" rel="stylesheet" type="text/css">
 </head>
 <body>
