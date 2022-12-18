@@ -167,7 +167,6 @@ public class UsuarioDAO {
 			} catch (SQLException e) { e.printStackTrace(); }
 			
 			rs.next();
-//			System.out.println("contraseña: " + rs.getString(1));
 			if(rs.getString(1).contentEquals(password)) { ret = true; }
 				
 				if(stmt != null) { 
@@ -480,7 +479,6 @@ public class UsuarioDAO {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-	//		System.out.println("contraseña: " + rs.getString(1));
 			try {
 				retorno=rs.getString(1);
 			} catch (SQLException e1) {
