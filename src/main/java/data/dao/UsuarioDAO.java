@@ -36,10 +36,8 @@ public class UsuarioDAO {
 	    DBConnection dbConnection = new DBConnection();
 	    Connection connection = dbConnection.getConnection();
 	    
-	    Properties cons = new Properties();
-	    cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 	    
-	    PreparedStatement ps = connection.prepareStatement(cons.getProperty("InsertUser"));
+	    PreparedStatement ps = connection.prepareStatement("INSERT INTO Users (Name, BirthDay, InscriptionD, Email, Password, Rol) values(?,?,?,?,?,?)");
 	    ps.setString(1, user.getNameSurname());
 	    ps.setTimestamp(2, user.getBirthDate());
 	    ps.setTimestamp(3,  user.getInscriptionDate());
@@ -65,8 +63,6 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			
-			Properties cons = new Properties();
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -76,7 +72,7 @@ public class UsuarioDAO {
 			ResultSet rs = null;
 			
 			try {
-				rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckRole") + "'" + email + "'");
+				rs = (ResultSet) stmt.executeQuery("SELECT Rol FROM Users WHERE Email =" + "'" + email + "'");
 			} catch (SQLException e) { e.printStackTrace(); }
 			
 			try {
@@ -114,9 +110,6 @@ public class UsuarioDAO {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
-
-			Properties cons = new Properties();
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -126,7 +119,7 @@ public class UsuarioDAO {
 			ResultSet rs = null;
 			
 			try {
-				rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckUser") + "'" + email + "'");
+				rs = (ResultSet) stmt.executeQuery("SELECT Email FROM Users WHERE Email =" + "'" + email + "'");
 			} catch (SQLException e) { e.printStackTrace(); }
 			
 			try {
@@ -152,8 +145,6 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 
-			Properties cons = new Properties();
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -163,7 +154,7 @@ public class UsuarioDAO {
 			ResultSet rs = null;
 			
 			try {
-				rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckPassword") + "'" + email + "'");
+				rs = (ResultSet) stmt.executeQuery("SELECT Password FROM Users WHERE Email = " + "'" + email + "'");
 			} catch (SQLException e) { e.printStackTrace(); }
 			
 			rs.next();
@@ -190,17 +181,11 @@ public class UsuarioDAO {
 	  try {
 		  connection = dbConnection.getConnection();
 	  } catch (IOException e) { e.printStackTrace(); }
-		
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
 	  
 	  try {
-		  ps = connection.prepareStatement(cons.getProperty("GetUser"));
+		  ps = connection.prepareStatement("SELECT * FROM Users WHERE Email = ?");
 		  ps.setString(1, email);
 	  } catch (SQLException e) { e.printStackTrace(); }
 	  	  
@@ -227,17 +212,12 @@ public class UsuarioDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateBirthUser"));
+			ps = connection.prepareStatement("UPDATE Users set BirthDay = ? WHERE Email = ?");
 			ps.setTimestamp(1, user.getBirthDate());
 			ps.setString(2, user.getEmail());
 			ps.executeUpdate();
@@ -252,16 +232,10 @@ public class UsuarioDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
 		PreparedStatement ps;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateNameUser"));
+			ps = connection.prepareStatement("UPDATE Users set Name = ? WHERE Email = ?");
 			ps.setString(1, user.getNameSurname());
 			ps.setString(2, user.getEmail());
 			ps.executeUpdate();
@@ -276,16 +250,10 @@ public class UsuarioDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
 		PreparedStatement ps;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateRolUser"));
+			ps = connection.prepareStatement("UPDATE Users set Rol = ? WHERE Email = ?");
 			ps.setString(1, user.getRol());
 			ps.setString(2, user.getEmail());
 			ps.executeUpdate();
@@ -299,17 +267,12 @@ public class UsuarioDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 		
 		PreparedStatement ps;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdatePassUser"));
+			ps = connection.prepareStatement("UPDATE Users set Password = ? WHERE Email = ?");
 			ps.setString(1, user.getPassword());
 			ps.setString(2, user.getEmail());
 			ps.executeUpdate();
@@ -332,11 +295,6 @@ public class UsuarioDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-	  
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	  
 		Statement stmt = null;
 		
@@ -347,7 +305,7 @@ public class UsuarioDAO {
 		ResultSet rs = null;
 	
 		try {
-			rs = (ResultSet) stmt.executeQuery(cons.getProperty("InfoAllUsers"));
+			rs = (ResultSet) stmt.executeQuery("SELECT * FROM Users ORDER BY Email");
 		} catch (SQLException e) { e.printStackTrace(); }
 	  if(rs!=null) {
 		try {
@@ -380,16 +338,11 @@ public class UsuarioDAO {
 		  connection = dbConnection.getConnection();
 	  } catch (IOException e) { e.printStackTrace(); }
 		
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
 	  
 	  try {
-		  ps = connection.prepareStatement(cons.getProperty("SeniorityUser"));
+		  ps = connection.prepareStatement("SELECT InscriptionD FROM Users WHERE Email = ?");
 		  ps.setString(1, mail);
 	  } catch (SQLException e) { e.printStackTrace(); }
 
@@ -421,17 +374,11 @@ public class UsuarioDAO {
 		  try {
 			  connection = dbConnection.getConnection();
 		  } catch (IOException e) { e.printStackTrace(); }
-			
-		  Properties cons = new Properties();
-		  
-		  try {
-			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		  } catch (IOException e) { e.printStackTrace(); }
 		  
 		  PreparedStatement ps = null;
 		  
 		  try {
-			  ps = connection.prepareStatement(cons.getProperty("SeniorityUserArr"));
+			  ps = connection.prepareStatement("SELECT InscriptionD FROM Users ORDER BY Email");
 		  } catch (SQLException e) { e.printStackTrace(); }
 
 		  ResultSet rs;
@@ -460,8 +407,6 @@ public class UsuarioDAO {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.getConnection();
 			
-			Properties cons = new Properties();
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		
 			Statement stmt = null;
 			try {
@@ -471,7 +416,7 @@ public class UsuarioDAO {
 			ResultSet rs = null;
 			
 			try {
-				rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckReservations") + "'" + email + "'");
+				rs = (ResultSet) stmt.executeQuery("SELECT count(id) FROM Reservations WHERE Email =" + "'" + email + "'");
 			} catch (SQLException e) { e.printStackTrace(); }
 			
 			try {
@@ -507,17 +452,11 @@ public class UsuarioDAO {
 		  try {
 			  connection = dbConnection.getConnection();
 		  } catch (IOException e) { e.printStackTrace(); }
-			
-		  Properties cons = new Properties();
-		  
-		  try {
-			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		  } catch (IOException e) { e.printStackTrace(); }
 		  
 		  PreparedStatement ps = null;
 		  
 		  try {
-			  ps = connection.prepareStatement(cons.getProperty("CountReservation"));
+			  ps = connection.prepareStatement("SELECT (SELECT COUNT(id) FROM Reservations WHERE Email = u.Email) FROM Users u ORDER BY u.Email");
 		  } catch (SQLException e) { e.printStackTrace(); }
 
 		  ResultSet rs;

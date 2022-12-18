@@ -50,16 +50,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	    
-	    Properties cons = new Properties();
-	    
-	    try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties")); } catch (FileNotFoundException e) { e.printStackTrace(); } 
-	    																   catch (IOException e) { e.printStackTrace(); }
 	 	
 	 	if(child.getbonusNumber() != 0) {
 	 		PreparedStatement ps_2;
 			try {
-				ps_2 = connection.prepareStatement(cons.getProperty("InsertChildReservationBono"));
+				ps_2 = connection.prepareStatement("INSERT INTO Reservations (Email, Date, Lenght, Price, Discount, Track, Type, ChildremNumber, IdBono) values(?,?,?,?,?,?,?,?,?)");
 				ps_2.setString(1, child.getEmail());
 			 	ps_2.setTimestamp(2, child.getFecha());
 			 	ps_2.setInt(3, child.getDuracion());
@@ -75,7 +70,7 @@ public class ReservaDAO {
 	 	}else {
 	 		PreparedStatement ps_2;
 			try {
-				ps_2 = connection.prepareStatement(cons.getProperty("InsertChildReservationIndiv"));
+				ps_2 = connection.prepareStatement("INSERT INTO Reservations (Email, Date, Lenght, Price, Discount, Track, Type, ChildremNumber) values(?,?,?,?,?,?,?,?)");
 				ps_2.setString(1, child.getEmail());
 			 	ps_2.setTimestamp(2, child.getFecha());
 			 	ps_2.setInt(3, child.getDuracion());
@@ -100,16 +95,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	    
-	    Properties cons = new Properties();
-	    
-	    try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties")); } catch (FileNotFoundException e) { e.printStackTrace(); } 
-	    																   catch (IOException e) { e.printStackTrace(); }
 	 	
 	 	if(adult.getbonusNumber() != 0) {
 	 		PreparedStatement ps_2;
 			try {
-				ps_2 = connection.prepareStatement(cons.getProperty("InsertAdultReservationBono"));
+				ps_2 = connection.prepareStatement("INSERT INTO Reservations (Email, Date, Lenght, Price, Discount, Track, Type, AdultsNumber, IdBono) values(?,?,?,?,?,?,?,?,?)");
 				ps_2.setString(1, adult.getEmail());
 			 	ps_2.setTimestamp(2, adult.getFecha());
 			 	ps_2.setInt(3, adult.getDuracion());
@@ -125,7 +115,7 @@ public class ReservaDAO {
 	 	}else {
 	 		PreparedStatement ps_2;
 			try {
-				ps_2 = connection.prepareStatement(cons.getProperty("InsertAdultReservationIndiv"));
+				ps_2 = connection.prepareStatement("INSERT INTO Reservations (Email, Date, Lenght, Price, Discount, Track, Type, AdultsNumber) values(?,?,?,?,?,?,?,?)");
 				ps_2.setString(1, adult.getEmail());
 			 	ps_2.setTimestamp(2, adult.getFecha());
 			 	ps_2.setInt(3, adult.getDuracion());
@@ -149,17 +139,12 @@ public class ReservaDAO {
 	    try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	    
-	    Properties cons = new Properties();
-	    
-	    try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties")); } catch (FileNotFoundException e) { e.printStackTrace(); } 
-	    																   catch (IOException e) { e.printStackTrace(); }
+
 	    
 	 	if(fam.getbonusNumber() != 0) {
 	 		PreparedStatement ps_2;
 			try {
-				ps_2 = connection.prepareStatement(cons.getProperty("InsertFamReservationBono"));
+				ps_2 = connection.prepareStatement("INSERT INTO Reservations (Email, Date, Lenght, Price, Discount, Track, Type, ChildremNumber, AdultsNumber, IdBono) values(?,?,?,?,?,?,?,?,?,?)");
 				ps_2.setString(1, fam.getEmail());
 			 	ps_2.setTimestamp(2, fam.getFecha());
 			 	ps_2.setInt(3, fam.getDuracion());
@@ -176,7 +161,7 @@ public class ReservaDAO {
 	 	}else {
 	 		PreparedStatement ps_2;
 			try {
-				ps_2 = connection.prepareStatement(cons.getProperty("InsertFamReservationIndiv"));
+				ps_2 = connection.prepareStatement("INSERT INTO Reservations (Email, Date, Lenght, Price, Discount, Track, Type, ChildremNumber, AdultsNumber) values(?,?,?,?,?,?,?,?,?)");
 				ps_2.setString(1, fam.getEmail());
 			 	ps_2.setTimestamp(2, fam.getFecha());
 			 	ps_2.setInt(3, fam.getDuracion());
@@ -237,12 +222,7 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 	  
 		Statement stmt = null;
 		
@@ -253,7 +233,7 @@ public class ReservaDAO {
 		ResultSet rs = null;
 		
 		try {
-			rs = (ResultSet) stmt.executeQuery(cons.getProperty("InfoMyReservation") + "'" + email + "'");
+			rs = (ResultSet) stmt.executeQuery("SELECT * FROM Reservations WHERE Email =" + "'" + email + "'");
 			while(rs.next()) {
 				String re = "Datos de la reserva:\n"+"ID"+rs.getString("Id")+"Email de usuario: "+rs.getString("Email")+" "+"Fecha de reserva: "+rs.getTimestamp("Date")+" "+
 				"Duracion de la reserva: "+rs.getInt("Lenght")+" "+"Pista: "+rs.getString("Track")+" "+"Precio total de la reserva: "+rs.getFloat("Price")+" "+"Descuento: "+
@@ -275,17 +255,12 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } 
 		  catch (IOException e) { e.printStackTrace(); }
-		    
-		Properties cons = new Properties();
 		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetTrackType"));
+			ps = connection.prepareStatement("SELECT * FROM Tracks WHERE Difficulty = ?");
 			ps.setString(1, type.toString());
 		} catch (SQLException e) { e.printStackTrace(); }
 		
@@ -316,17 +291,11 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
 	  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("CheckBonoById"));
+			ps = connection.prepareStatement("SELECT * FROM Bono WHERE IdNumber = ?");
 			ps.setInt(1, idbono);
 		} catch (SQLException e) { e.printStackTrace(); }
 
@@ -355,17 +324,12 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		   
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
 		
 		//Primero obtenemos todas las reservas comprendidas entre la hora de la reserva a realizar y dos horas antes
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("CheckDateReservation"));
+			ps = connection.prepareStatement("SELECT * FROM Reservations WHERE ? <= Date AND Date <= ? AND Track = ?");
 			ps.setTimestamp(1, SystemManager.SumaRestaFecha(date, 120, "r"));
 			ps.setTimestamp(2, date);
 			ps.setString(3, track);
@@ -386,7 +350,7 @@ public class ReservaDAO {
 			PreparedStatement ps2 = null;
 			
 			try {
-				ps2 = connection.prepareStatement(cons.getProperty("CheckDateReservation"));
+				ps2 = connection.prepareStatement("SELECT * FROM Reservations WHERE ? <= Date AND Date <= ? AND Track = ?");
 				ps2.setTimestamp(1, date);
 				ps2.setTimestamp(2, SystemManager.SumaRestaFecha(date, lenght, "s"));
 				ps2.setString(3, track);
@@ -413,17 +377,12 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateEmailRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Email = ? WHERE Email = ?");
 			ps.setString(1, child.getEmail());
 			ps.setString(2, mail);
 			ps.executeUpdate();
@@ -438,16 +397,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
+
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateEmailRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Email = ? WHERE Email = ?");
 			ps.setString(1, adult.getEmail());
 			ps.setString(2, mail);
 			ps.executeUpdate();
@@ -462,16 +416,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateEmailRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Email = ? WHERE Email = ?");
 			ps.setString(1, fam.getEmail());
 			ps.setString(2, mail);
 			ps.executeUpdate();
@@ -487,16 +436,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateDateRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Date = ? WHERE Email = ?");
 			ps.setTimestamp(1, child.getFecha());
 			ps.setString(2, child.getEmail());
 			ps.executeUpdate();
@@ -511,16 +455,12 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateDateRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Date = ? WHERE Email = ?");
 			ps.setTimestamp(1, adult.getFecha());
 			ps.setString(2, adult.getEmail());
 			ps.executeUpdate();
@@ -535,16 +475,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateDateRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Date = ? WHERE Email = ?");
 			ps.setTimestamp(1, fam.getFecha());
 			ps.setString(2, fam.getEmail());
 			ps.executeUpdate();
@@ -560,16 +495,10 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateLenghtRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Lenght = ?, Price = ? WHERE Email = ?");
 			ps.setInt(1, child.getDuracion());
 			ps.setFloat(2, child.getDescuento());
 			ps.setString(3, child.getEmail());
@@ -585,16 +514,12 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateLenghtRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Lenght = ?, Price = ? WHERE Email = ?");
 			ps.setInt(1, adult.getDuracion());
 			ps.setFloat(2, adult.getDescuento());
 			ps.setString(3, adult.getEmail());
@@ -610,16 +535,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateLenghtRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Lenght = ?, Price = ? WHERE Email = ?");
 			ps.setInt(1, fam.getDuracion());
 			ps.setFloat(2, fam.getDescuento());
 			ps.setString(3, fam.getEmail());
@@ -636,16 +556,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateTrackRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Track = ? WHERE Email = ?");
 			ps.setString(1, child.getPista());
 			ps.setString(2, child.getEmail());
 			ps.executeUpdate();
@@ -660,16 +575,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateTrackRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Track = ? WHERE Email = ?");
 			ps.setString(1, adult.getPista());
 			ps.setString(2, adult.getEmail());
 			ps.executeUpdate();
@@ -684,16 +594,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateTrackRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set Track = ? WHERE Email = ?");
 			ps.setString(1, fam.getPista());
 			ps.setString(2, fam.getEmail());
 			ps.executeUpdate();
@@ -709,16 +614,10 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateNAdultRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set AdultsNumber = ? WHERE Email = ?");
 			ps.setInt(1, adult.getadultsNumber());
 			ps.setString(2, adult.getEmail());
 			ps.executeUpdate();
@@ -733,16 +632,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateNAdultRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set AdultsNumber = ? WHERE Email = ?");
 			ps.setInt(1, fam.getadultsNumber());
 			ps.setString(2, fam.getEmail());
 			ps.executeUpdate();
@@ -758,16 +652,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateNChilRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set AdultsNumber = ? WHERE Email = ?");
 			ps.setInt(1, child.getchildrenNumber());
 			ps.setString(2, child.getEmail());
 			ps.executeUpdate();
@@ -782,16 +671,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateNChilRes"));
+			ps = connection.prepareStatement("UPDATE Reservations set AdultsNumber = ? WHERE Email = ?");
 			ps.setInt(1, fam.getchildrenNumber());
 			ps.setString(2, fam.getEmail());
 			ps.executeUpdate();
@@ -813,16 +697,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetAllResFut"));
+			ps = connection.prepareStatement("SELECT * FROM Reservations WHERE Date >= ?");
 			ps.setTimestamp(1, new Timestamp(new java.util.Date().getTime()));
 		} catch (SQLException e1) { e1.printStackTrace(); }
 		
@@ -849,16 +728,10 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("DeleteReservation"));
+			ps = connection.prepareStatement("DELETE FROM Reservations WHERE Id = ?");
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -879,16 +752,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetReservationDate"));
+			ps = connection.prepareStatement("SELECT * FROM Reservations WHERE ? <= Date AND Date <= ? AND Email = ?");
 			ps.setTimestamp(1, inicio);
 			ps.setTimestamp(2, fin);
 			ps.setString(3, Email);
@@ -925,16 +793,12 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 	  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("CheckBono"));
+			ps = connection.prepareStatement("SELECT * FROM Bono WHERE Email = ? AND Type = ? AND SessionNumber < 5");
 			ps.setString(1, email);
 			ps.setString(2, type);
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -962,16 +826,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
-	  
+
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("CheckReservationMod"));
+			ps = connection.prepareStatement("SELECT * FROM Reservations WHERE Email = ? AND Date >= ?");
 			ps.setString(1, email);
 			ps.setTimestamp(2, SystemManager.SumaRestaFecha(new Timestamp(new java.util.Date().getTime()), 1440, "s"));
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -1004,17 +863,12 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 	  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("CheckBono"));
+			ps = connection.prepareStatement("SELECT * FROM Bono WHERE Email = ? AND Type = ? AND SessionNumber < 5");
 			ps.setString(1, email);
 			ps.setString(2, type);
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -1039,17 +893,12 @@ public class ReservaDAO {
 	    try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	    
-	    Properties cons = new Properties();
-	    
-	    try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties")); } catch (FileNotFoundException e) { e.printStackTrace(); } 
-	    																   catch (IOException e) { e.printStackTrace(); }
+
 	    
 	 	
  		PreparedStatement ps_2;
 		try {
-			ps_2 = connection.prepareStatement(cons.getProperty("InsertBono"));
+			ps_2 = connection.prepareStatement("INSERT INTO Bono (SessionNumber, DateCreated, Type, Email) values (?,?,?,?)");
 			ps_2.setInt(1, 0);
 		 	ps_2.setTimestamp(2, new Timestamp(new java.util.Date().getTime()));
 		 	ps_2.setString(3, type);
@@ -1067,17 +916,12 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 		
 		PreparedStatement ps;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("UpdateSessionBono"));
+			ps = connection.prepareStatement("UPDATE Bono set SessionNumber = SessionNumber+1 WHERE IdNumber = ?");
 			ps.setInt(1, idBono);
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -1094,16 +938,12 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 	  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("CheckReservationBono"));
+			ps = connection.prepareStatement("SELECT * FROM Reservations WHERE Id = ? AND IdBono IS NOT NULL");
 			ps.setInt(1, id);
 		} catch (SQLException e) { e.printStackTrace(); }
 
@@ -1129,17 +969,12 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+	   
 	  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetIdBonoReservation"));
+			ps = connection.prepareStatement("SELECT * FROM Reservations WHERE Id = ?");
 			ps.setInt(1, id);
 		} catch (SQLException e) { e.printStackTrace(); }
 
@@ -1163,17 +998,12 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 		
 		PreparedStatement ps;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("DeleteSessionBono"));
+			ps = connection.prepareStatement("UPDATE Bono set SessionNumber = SessionNumber-1 WHERE IdNumber = ?");
 			ps.setInt(1, idBono);
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -1190,17 +1020,12 @@ public class ReservaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-	    
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 	  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("CheckBonoById"));
+			ps = connection.prepareStatement("SELECT * FROM Bono WHERE IdNumber = ?");
 			ps.setInt(1, idBono);
 		} catch (SQLException e) { e.printStackTrace(); }
 
@@ -1225,16 +1050,11 @@ public class ReservaDAO {
 			connection = dbConnection.getConnection();
 		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 		
 		PreparedStatement ps;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("DeleteBono"));
+			ps = connection.prepareStatement("DELETE FROM Bono WHERE IdNumber = ?");
 			ps.setInt(1, idBono);
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }

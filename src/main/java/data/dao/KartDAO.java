@@ -14,7 +14,16 @@ import business.KartDTO;
 import data.common.DBConnection;
 import data.common.EstadoKart;
 
+/***
+ * A class to manage the model of data of karts
+ * @author Antonio Díaz Pérez
+ *
+ */
 public class KartDAO {
+	/***
+	 * Function to create a new kart (add it to the database)
+	 * @param kart the DTO of the kart
+	 */
 	public static void crearKart(KartDTO kart){
 
 		  DBConnection dbConnection = new DBConnection();
@@ -23,16 +32,11 @@ public class KartDAO {
 			  connection = dbConnection.getConnection();
 		  } catch (IOException e) { e.printStackTrace(); }
 		  
-		  Properties cons = new Properties();
-		  
-		  try {
-			  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		  } catch (IOException e) { e.printStackTrace(); }
 		  
 		  PreparedStatement ps;
 		  
 		  try {
-			  ps = connection.prepareStatement(cons.getProperty("InsertKart"));
+			  ps = connection.prepareStatement("INSERT INTO Karts (Id, Child, State) values(?,?,?)");
 			  ps.setInt(1, kart.getId());
 			  ps.setBoolean(2, kart.getChild());
 			  ps.setString(3, kart.getEstado().toString());
@@ -44,17 +48,24 @@ public class KartDAO {
 		  dbConnection.closeConnection();
 	}
 	
-	
+	/***
+	 * Create a kart without DTO
+	 * @param id
+	 * @param child
+	 * @param estado
+	 * @param track
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public static void crearKart(int id, boolean child, String estado, String track) throws FileNotFoundException, IOException, SQLException {
 
 		  DBConnection dbConnection = new DBConnection();
 		  Connection connection = dbConnection.getConnection();
 		  
-		  Properties cons = new Properties();
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
 		  
 		  if(PistaDAO.comprobarExistenciaPista(track) == true) {
-			  PreparedStatement ps = connection.prepareStatement(cons.getProperty("InsertKart"));
+			  PreparedStatement ps = connection.prepareStatement("INSERT INTO Karts (Id, Child, State) values(?,?,?)");
 			  ps.setInt(1, id);
 			  ps.setBoolean(2, child);
 			  ps.setString(3, estado);
@@ -74,17 +85,11 @@ public class KartDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
-		  
+
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetKart"));
+			ps = connection.prepareStatement("SELECT * FROM Karts WHERE Id = ?");
 			ps.setInt(1, id);
 		} catch (SQLException e1) { e1.printStackTrace(); }
 		
@@ -116,16 +121,12 @@ public class KartDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetListKartNoAssociated"));
+			ps = connection.prepareStatement("SELECT * FROM Karts WHERE TrackName IS NULL AND Child = ? ORDER BY Id");
 			ps.setInt(1, child);
 		} catch (SQLException e1) { e1.printStackTrace(); }
 		
@@ -157,16 +158,11 @@ public class KartDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetAllKart"));
+			ps = connection.prepareStatement("SELECT * FROM Karts ORDER BY Id");
 		} catch (SQLException e1) { e1.printStackTrace(); }
 		
 		ResultSet rs = null;
@@ -194,17 +190,12 @@ public class KartDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("ModifyStateKart"));
+			ps = connection.prepareStatement("UPDATE Karts set State = ? WHERE Id = ?");
 			ps.setString(1, state);
 			ps.setInt(2, id);
 			ps.executeUpdate();

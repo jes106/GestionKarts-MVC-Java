@@ -41,16 +41,11 @@ public class PistaDAO {
 		  connection = dbConnection.getConnection();
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  PreparedStatement ps = null;
 	  
 	  try {
-		  ps = connection.prepareStatement(cons.getProperty("InsertTrack"));
+		  ps = connection.prepareStatement("INSERT INTO Tracks (Name, State, Difficulty, MaxKarts) values(?,?,?,?)");
 		  ps.setString(1, track.getNombrePista());
 		  ps.setBoolean(2, track.getEstadoPista());
 		  ps.setString(3, track.getDificultad().toString());
@@ -74,11 +69,7 @@ public class PistaDAO {
 		  connection = dbConnection.getConnection();
 	  } catch (IOException e) { e.printStackTrace(); }
 	  
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (IOException e) { e.printStackTrace(); }
+
 	  
 	  Statement stmt = null;
 	  
@@ -89,7 +80,7 @@ public class PistaDAO {
 	  ResultSet rs = null;
 	  
 	  try {
-		  rs = (ResultSet) stmt.executeQuery(cons.getProperty("CheckTrack") + "'" + name + "'");
+		  rs = (ResultSet) stmt.executeQuery("SELECT Name FROM Tracks WHERE Name = " + "'" + name + "'");
 	  } catch (SQLException e) { e.printStackTrace(); }
 	  
 	  try {
@@ -126,18 +117,13 @@ public class PistaDAO {
 		  connection = dbConnection.getConnection();
 	  } catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	    
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
 	  
 		  
 	  if(comprobarExistenciaPista(track) == true && comprobarSitiosLibrePista(track) == true) {
 		  PreparedStatement ps;
 		  
 		  try {
-			  ps = connection.prepareStatement(cons.getProperty("AssociateTrackToKart"));
+			  ps = connection.prepareStatement("UPDATE Karts set TrackName = ? WHERE Id = ?");
 			  ps.setString(1, track);
 			  ps.setInt(2, kart);
 			  
@@ -161,11 +147,6 @@ public class PistaDAO {
 		  connection = dbConnection.getConnection();
 	  } catch (IOException e) { e.printStackTrace(); }
 	    
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (IOException e) { e.printStackTrace(); }
 	  
 	  Statement stmt_track = null;
 	  
@@ -176,7 +157,7 @@ public class PistaDAO {
 	  ResultSet rs_track = null;
 	  
 	  try {
-		  rs_track = (ResultSet) stmt_track.executeQuery(cons.getProperty("GetTrack") + "'" + track + "'");
+		  rs_track = (ResultSet) stmt_track.executeQuery("SELECT * FROM Tracks WHERE Name = " + "'" + track + "'");
 	  } catch (SQLException e) { e.printStackTrace(); }
 	  
 	  Statement stmt_kart = null;
@@ -188,7 +169,7 @@ public class PistaDAO {
 	  ResultSet rs_kart = null;
 	  
 	  try {
-		  rs_kart = (ResultSet) stmt_kart.executeQuery(cons.getProperty("GetKartTrack") + "'" + track + "'");
+		  rs_kart = (ResultSet) stmt_kart.executeQuery("SELECT COUNT(Id) FROM Karts WHERE (State = 'Disponible' OR State = 'Reservado') AND TrackName = " + "'" + track + "'");
 	  } catch (SQLException e) { e.printStackTrace(); }
 	  
 	  
@@ -219,17 +200,12 @@ public class PistaDAO {
 	  try {
 		  connection = dbConnection.getConnection();
 	  } catch (IOException e) { e.printStackTrace(); }
-	    
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (IOException e) { e.printStackTrace(); }
+
 	  
 	  PreparedStatement ps = null;
 	  
 	  try {
-		  ps = connection.prepareStatement(cons.getProperty("TracksMaintenance"));
+		  ps = connection.prepareStatement("SELECT * FROM Tracks WHERE State = 0");
 	  } catch (SQLException e) { e.printStackTrace(); }
 	  
 	  ResultSet rs = null;
@@ -262,18 +238,13 @@ public class PistaDAO {
 	  try {
 		  connection = dbConnection.getConnection();
 	  } catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-	    
-	  Properties cons = new Properties();
-	  
-	  try {
-		  cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-	  } catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+
 	  
 	  // Lo primero es obtener aquellas pistas que no esten en mantenimiento y con la dificultad especificada
 	  PreparedStatement ps = null;
 	  
 	  try {
-		  ps = connection.prepareStatement(cons.getProperty("GetTracksDificultyMinKarts"));
+		  ps = connection.prepareStatement("SELECT * FROM Tracks WHERE State = ? AND Difficulty = ?");
 		  ps.setInt(1, 1);
 		  ps.setString(2, dificultad.toString());
 	  } catch (SQLException e2) { e2.printStackTrace(); }
@@ -297,7 +268,7 @@ public class PistaDAO {
 			  ResultSet rs_kart = null;
 			
 			  try {
-				  rs_kart = (ResultSet) stmt_kart.executeQuery(cons.getProperty("GetKartTrack") + "'" + rs.getString("Name") + "'");
+				  rs_kart = (ResultSet) stmt_kart.executeQuery("SELECT COUNT(Id) FROM Karts WHERE (State = 'Disponible' OR State = 'Reservado') AND TrackName = " + "'" + rs.getString("Name") + "'");
 				  rs_kart.next();
 				  
 				  if(rs_kart.getInt(1) >= nKarts) {
@@ -325,17 +296,12 @@ public class PistaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetListTrack"));
+			ps = connection.prepareStatement("SELECT * FROM Tracks WHERE State = 1 AND (Difficulty = ? OR Difficulty = ?) ORDER BY Name ");
 			ps.setString(1, Dificultad.familiar.toString());
 			if(child == 1) { ps.setString(2, Dificultad.infantil.toString()); }
 			else { ps.setString(2, Dificultad.adultos.toString()); }
@@ -371,16 +337,11 @@ public class PistaDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetAllTrack"));
+			ps = connection.prepareStatement("SELECT * FROM Tracks ORDER BY Name ");
 		} catch (SQLException e1) { e1.printStackTrace(); }
 		
 		ResultSet rs = null;
@@ -410,17 +371,12 @@ public class PistaDAO {
 		try {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
-		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
+
 		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("GetTrackDisponible"));
+			ps = connection.prepareStatement("SELECT * FROM Tracks WHERE Difficulty = ? AND MaxKarts > ?");
 			ps.setString(1, type);
 			ps.setInt(2, min);
 		} catch (SQLException e1) { e1.printStackTrace(); }
@@ -451,16 +407,10 @@ public class PistaDAO {
 			connection = dbConnection.getConnection();
 		} catch (IOException e) { e.printStackTrace(); }
 		  
-		Properties cons = new Properties();
-		
-		try {
-			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
-		} catch (IOException e) { e.printStackTrace(); }
-		  
 		PreparedStatement ps = null;
 		
 		try {
-			ps = connection.prepareStatement(cons.getProperty("ModifyStateTrack"));
+			ps = connection.prepareStatement("UPDATE Tracks set State = ? WHERE Name = ?");
 			ps.setString(2, name);
 			if(state.equals("Disponible")) { ps.setInt(1, 1); }
 			else { ps.setInt(1, 0); }
