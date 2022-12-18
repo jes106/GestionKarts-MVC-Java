@@ -59,6 +59,7 @@
 	<div class="note-form">
 		<form method="post" action="/Práctica3/PostReservarConNuevoBono">
 		    <h2 id="respuesta">Esperando que pida las pistas...</h2>
+		    <div id="noPistas" style="color:red;"></div>
 			<div class="field">
 				<select id="miSelect1" name="Nombre">
 				</select>
@@ -139,8 +140,7 @@
 		    '<input type="text" readonly name="Email" value="' + formulario.elements.Email.value + '">';
 		    document.getElementById('ocultos').innerHTML = ParametrosOcultos;
 		   	
-		    
-		    var ParametrosVisibles = '<div class="field"><label for="Duracion">Duración de la reserva: </label><input type="number" name="Duracion" required></div><br>';
+		    var ParametrosVisibles = '<div class="field"><label for="Duracion">Duración de la reserva: </label><select name="Duracion" required><option>60</option><option>90</option><option>120</option></select></div><br>';
 			
 		    if(dificultad.elements.Tipo.value == 'Infantil'){
 		    	ParametrosVisibles = ParametrosVisibles + '<div class="field"><label for="Child">Numero de menores: </label><input type="number" name="Child" value="" required></div>';
@@ -160,6 +160,9 @@
 		   	fetch(url)
 		      .then(response => response.text())
 		      .then(data => {
+		    	if(data == ''){
+	            	document.getElementById("noPistas").innerHTML = "No hay Pistas con estas características"
+	            }
 		    	// Procesar la respuesta del servlet
 	              var substrings = data.split(",");
 		                
