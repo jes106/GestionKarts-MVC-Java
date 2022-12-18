@@ -93,6 +93,7 @@
 				<a href="/Práctica3/mvc/views/ClientViews/GetReservationsWithDateIntervalView.jsp">Consultar Reservas</a>
 				<a href="/Práctica3/mvc/views/ClientViews/MakeIndividualReservation.jsp">Reserva Individual</a>
 				<a href="/Práctica3/mvc/views/ClientViews/MenuBonoView.jsp">Reserva con Bono</a>
+				<a href="/Práctica3/mvc/views/ClientViews/DeleteClientReservationView.jsp">Eliminar Reserva</a>
 			</div>
 		</div>
 	
