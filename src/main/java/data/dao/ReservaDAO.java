@@ -980,7 +980,8 @@ public class ReservaDAO {
 		
 		try {
 			rs = (ResultSet) ps.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
+				System.out.println("Control");
 				ArrayList<String> var = new ArrayList<String>();
 				var.add(String.valueOf(rs.getInt("Id")));
 				var.add(rs.getString("Track"));

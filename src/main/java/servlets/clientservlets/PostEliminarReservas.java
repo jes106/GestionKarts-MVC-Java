@@ -1,6 +1,8 @@
 package servlets.clientservlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,11 @@ public class PostEliminarReservas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("ID"));
+		String data[] = request.getParameter("ID").split(" ------- ");
+		int id = Integer.parseInt(data[0]);
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();	
 		
 		ReservaDAO.eliminarReserva(id);
 		

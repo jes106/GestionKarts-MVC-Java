@@ -45,7 +45,7 @@ public class GetReservasUsuarioModificables extends HttpServlet {
         	while(iterator.hasNext()) {
         		out.println(iterator.next());
         		if(iterator.hasNext()) {
-        			out.println("  -  ");
+        			out.println(" ------- ");
         		}
         	}
         	out.println("//");
