@@ -3,6 +3,9 @@ package data.common;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,16 +14,24 @@ import java.util.Properties;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import data.common.*;
 
 /**
  * A class to manage the MySQL connection (general methods and configuration).
  * @author Antonio Diaz Perez
  * @version 14/10/2022
  */
-
 public class DBConnection {
 	
 	protected Connection connection = null;
+
+	public DBConnection() {
+
+		
+	}
+	
 	
 	/***
 	 * Function to connect to the database
@@ -30,24 +41,6 @@ public class DBConnection {
 	 */
 	public Connection getConnection() throws FileNotFoundException, IOException{
 		
-		// Open the properties file
-		Properties propiedades = new Properties();
-		propiedades.load(new FileReader("./src/main/java/data/common/config.properties"));
-	    Context ctx;
-	    String url=null;
-	    String user=null;
-	    String pass=null;
-	    
-		try {
-			ctx = new InitialContext();
-			Context env = (Context) ctx.lookup("java:comp/env");
-			url = (String) env.lookup("URL");
-			user = (String) env.lookup("User");
-			pass = (String) env.lookup("Password");
-		} catch (NamingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 	    
 	    
 		try{
