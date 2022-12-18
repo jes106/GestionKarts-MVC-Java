@@ -105,7 +105,7 @@
 			}
 			//muestro el boton que envia un formulario oculto con los datos para la ceracion del bono
 			document.getElementById("bono").innerHTML = '<form id="miFormulario" method="" action="">' + 
-			'<input type="text" readonly name="Tipo" value="Adulto" style="display:none;">' + 
+			'<input type="text" readonly name="Tipo" value="Adultos" style="display:none;">' + 
 			'<input type="text" readonly name="Email" value=<%= usuario.getUsuario() %> style="display:none;">' + 
 			'<button href="#" onclick="visibilidad()">Crear Bono Adulto y Reservar</button></form>';
 		    return false;

@@ -97,11 +97,7 @@ public class KartDTO {
 		String tipo;
 		if(Child == true){ tipo = "Child"; }
 		else { tipo = "Adult"; }
-		
-		//System.out.println("Id -> " + Id);
-		//System.out.println("Tipo -> " + tipo);
-		//System.out.println("Estado -> " + Estado);
-		
+				
 		return "Informacion Kart: \n" + "-------------------------\n" + "Id -> " + Id + "\nTipo -> " + tipo + "\nEstado -> " + Estado;
 	}
 

@@ -58,22 +58,13 @@ public class PostReservarConNuevoBono extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		out.println("Email -> <" + email + ">\n");
-		out.println("Tipo -> <" + type + ">\n");
-		out.println("Date -> " + date + "\n");
-		out.println("Pista -> " + track + "\n");
-		out.println("Duracion -> " + lenght + "\n");
-		out.println("Bono -> " + bono + "\n");
-		
 		
 		if(bono == true) { // bono == true
-			out.println("\tControl");
 			ReservaDAO.crearBono(email, type);
 			idBono = ReservaDAO.obtenerBono(email, type);
-			out.println("\tIdBono -> " + String.valueOf(idBono)  + "\n");
 			if(type.equals("infantil")) {
 				ReservaMgr.addReservaChild(email, date, lenght, track, Dificultad.infantil, child, idBono);
-			}else if(type.equals("iamiliar")) {
+			}else if(type.equals("familiar")) {
 				ReservaMgr.addReservaFam(email, date, lenght, track, Dificultad.familiar, child, adult, idBono);
 			}else if(type.equals("adultos")) {
 				ReservaMgr.addReservaAdult(email, date, lenght, track, Dificultad.adultos, adult, idBono);

@@ -36,7 +36,7 @@ public class GetPistasDisponibles extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type = request.getParameter("Tipo");
+		String type = request.getParameter("Tipo").toLowerCase();
 		Timestamp date = SystemManager.StringToDateSQL2(request.getParameter("Date") + " " + request.getParameter("Time") + ":00");
 		int min = Integer.parseInt(request.getParameter("Min"));
 		
