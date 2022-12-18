@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Indica el tipo</title>
-<link href="../views/formStyles.css" rel="stylesheet" type="text/css">
+<link href="/Práctica3/mvc/views/formStyles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<%

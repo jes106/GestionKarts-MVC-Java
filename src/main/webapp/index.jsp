@@ -44,11 +44,11 @@
 			<a href="/Práctica3/mvc/views/ModifyAdminView.jsp">Modificar Datos</a>
 			<a href="/Práctica3/mvc/views/RegisterAdminView.jsp">Registrar usuario</a>
 			<a href="/Práctica3/crearkart?rol=Administrador">Añadir Kart</a>
-			<a href="/Práctica3/crearpista?rol=Administrador">Añadir Pista</a>
-			<a href="/Práctica3/mvc/views/SelectTypeView.jsp">Asociar Kart-Pista</a>
-			<a href="/Práctica3/mvc/views/ModifyKartView.jsp">Modificar Kart</a>
-			<a href="/Práctica3/mvc/views/ModifyTrackView.jsp">Modificar Pista</a>
-			<a href="/Práctica3/mvc/views/DeleteReservationView.jsp">Eliminar Reserva</a>
+			<a href="/Práctica3/creartrack?rol=Administrador">Añadir Pista</a>
+			<a href="/Práctica3/asociarkartpistas?rol=Administrador">Asociar Kart-Pista</a>
+			<a href="/Práctica3/ManejadorModifyKart?rol=Administrador">Modificar Kart</a>
+			<a href="/Práctica3/ManejadorModifyTrack?rol=Administrador">Modificar Pista</a>
+			<a href="/Práctica3/ManejadorDeleteReservation?rol=Administrador">Eliminar Reserva</a>
 			
 		</div>
 		<h2>Listado de clientes:</h2>
