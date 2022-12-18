@@ -44,7 +44,20 @@ public class PostEliminarReservas extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();	
 		
-		ReservaDAO.eliminarReserva(id);
+		
+//		out.println(ReservaDAO.getIdBonoReserva(id));
+		
+		if(ReservaDAO.compruebaReservaBono(id) == true) {
+			int idBono = ReservaDAO.getIdBonoReserva(id);
+			ReservaDAO.eliminarReserva(id);
+			ReservaDAO.DeleteSessionBono(idBono);
+			
+			if(ReservaDAO.getSessionBono(idBono) == 0) {
+				ReservaDAO.deleteBono(idBono);
+			}
+		}else {
+			ReservaDAO.eliminarReserva(id);
+		}
 		
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}

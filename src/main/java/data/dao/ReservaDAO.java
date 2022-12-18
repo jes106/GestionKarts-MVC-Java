@@ -986,6 +986,7 @@ public class ReservaDAO {
 				var.add(String.valueOf(rs.getInt("Id")));
 				var.add(rs.getString("Track"));
 				var.add(rs.getString("Date"));
+				var.add(String.valueOf(rs.getInt("IdBono")));
 				res.add(var);
 			}
 		} catch (SQLException e) { e.printStackTrace(); }
@@ -1078,6 +1079,163 @@ public class ReservaDAO {
 		
 		try {
 			ps = connection.prepareStatement(cons.getProperty("UpdateSessionBono"));
+			ps.setInt(1, idBono);
+			ps.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		dbConnection.closeConnection();
+	}
+
+	public static boolean compruebaReservaBono(int id) {
+		boolean bool = false;
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+	    
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+	  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("CheckReservationBono"));
+			ps.setInt(1, id);
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			if(rs.next()) {
+				bool = true;
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		dbConnection.closeConnection();
+		return bool;
+	}
+
+	public static int getIdBonoReserva(int id) {
+		int idBono = -1;
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+	    
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+	  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("GetIdBonoReservation"));
+			ps.setInt(1, id);
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			if(rs.next()) {
+				idBono = rs.getInt("IdBono");
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		dbConnection.closeConnection();
+		return idBono;		
+	}
+
+	public static void DeleteSessionBono(int idBono) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		PreparedStatement ps;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("DeleteSessionBono"));
+			ps.setInt(1, idBono);
+			ps.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		dbConnection.closeConnection();
+	}
+
+	public static int getSessionBono(int idBono) {
+		int session = 0;
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+	    
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+	  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("CheckBonoById"));
+			ps.setInt(1, idBono);
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			if(rs.next()) {
+				session = rs.getInt("SessionNumber");
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		dbConnection.closeConnection();
+		return session;
+	}
+
+	public static void deleteBono(int idBono) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		PreparedStatement ps;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("DeleteBono"));
 			ps.setInt(1, idBono);
 			ps.executeUpdate();
 		} catch (SQLException e) { e.printStackTrace(); }

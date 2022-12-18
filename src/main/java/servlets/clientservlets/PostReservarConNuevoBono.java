@@ -80,7 +80,7 @@ public class PostReservarConNuevoBono extends HttpServlet {
 			}
 		}
 		
-		//request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 }
