@@ -993,4 +993,94 @@ public class ReservaDAO {
 		
 		return res;
 	}
+
+	public static int obtenerBono(String email, String type) {
+		int id = -1;
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (IOException e) { e.printStackTrace(); }
+	    
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (IOException e) { e.printStackTrace(); }
+	  
+		PreparedStatement ps = null;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("CheckBono"));
+			ps.setString(1, email);
+			ps.setString(2, type);
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		ResultSet rs = null;
+		
+		try {
+			rs = (ResultSet) ps.executeQuery();
+			if(rs.next()) {
+				id = rs.getInt("IdNumber");
+			}
+		} catch (SQLException e) { e.printStackTrace(); }
+
+		dbConnection.closeConnection();
+		return id;
+	}
+	
+	public static void crearBono(String email, String type) {
+		DBConnection dbConnection = new DBConnection();
+	    Connection connection = null;
+		
+	    try {
+			connection = dbConnection.getConnection();
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+	    
+	    Properties cons = new Properties();
+	    
+	    try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties")); } catch (FileNotFoundException e) { e.printStackTrace(); } 
+	    																   catch (IOException e) { e.printStackTrace(); }
+	    
+	 	
+ 		PreparedStatement ps_2;
+		try {
+			ps_2 = connection.prepareStatement(cons.getProperty("InsertBono"));
+			ps_2.setInt(1, 0);
+		 	ps_2.setTimestamp(2, new Timestamp(new java.util.Date().getTime()));
+		 	ps_2.setString(3, type);
+		 	ps_2.setString(4, email);
+		 	ps_2.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }	
+		  
+		dbConnection.closeConnection();
+	}
+
+	public static void updateSessionBono(int idBono) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = null;
+		
+		try {
+			connection = dbConnection.getConnection();
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		Properties cons = new Properties();
+		
+		try {
+			cons.load(new FileReader("./src/main/java/data/common/Consultas.properties"));
+		} catch (FileNotFoundException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		
+		PreparedStatement ps;
+		
+		try {
+			ps = connection.prepareStatement(cons.getProperty("UpdateSessionBono"));
+			ps.setInt(1, idBono);
+			ps.executeUpdate();
+		} catch (SQLException e) { e.printStackTrace(); }
+		
+		dbConnection.closeConnection();
+	}
 }

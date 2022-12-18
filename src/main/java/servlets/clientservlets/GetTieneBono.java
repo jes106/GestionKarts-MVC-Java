@@ -31,7 +31,7 @@ public class GetTieneBono extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("Email");
-		String type = request.getParameter("Tipo");
+		String type = request.getParameter("Tipo").toLowerCase();
 		
 		boolean bool = ReservaDAO.CompruebaBono(email, type);
 		

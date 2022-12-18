@@ -39,6 +39,7 @@ public class ReservaMgr {
 		
 		if(ReservaDAO.CompruebaFechaReserva(date, lenght, track) == true) {
 			ReservaDAO.altaReservaChild(childR);
+			if(idbono != -1) { ReservaDAO.updateSessionBono(idbono); }
 			return true;
 		}else { return false; }
 	}
@@ -69,6 +70,7 @@ public class ReservaMgr {
 		
 		if(ReservaDAO.CompruebaFechaReserva(date, lenght, track) == true) {
 			ReservaDAO.altaReservaFamiliar(fam);
+			if(idbono != -1) { ReservaDAO.updateSessionBono(idbono); }
 			return true;
 		}else { return false; }
 		
@@ -101,6 +103,7 @@ public class ReservaMgr {
 		
 		if(ReservaDAO.CompruebaFechaReserva(date, lenght, track) == true) {
 			ReservaDAO.altaReservaAdults(adult);
+			if(idbono != -1) { ReservaDAO.updateSessionBono(idbono); }
 			return true;
 		}else { return false; }
 		

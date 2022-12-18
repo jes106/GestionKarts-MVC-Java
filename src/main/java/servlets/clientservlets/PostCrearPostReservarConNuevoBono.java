@@ -16,16 +16,16 @@ import data.common.SystemManager;
 import data.dao.ReservaDAO;
 
 /**
- * Servlet implementation class PostReservaIndividual
+ * Servlet implementation class PostCrearPostReservarConNuevoBono
  */
-@WebServlet("/PostReservaIndividual")
-public class PostReservaIndividual extends HttpServlet {
+@WebServlet("/PostCrearPostReservarConNuevoBono")
+public class PostCrearPostReservarConNuevoBono extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostReservaIndividual() {
+    public PostCrearPostReservarConNuevoBono() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -56,17 +56,11 @@ public class PostReservaIndividual extends HttpServlet {
 		if(request.getParameter("Adult") != null) { adult = Integer.parseInt(request.getParameter("Adult")); }
 		
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();		
+		PrintWriter out = response.getWriter();
 		
-		if(bono == false) {
-			if(type.equals("Infantil")) {
-				ReservaMgr.addReservaChild(email, date, lenght, track, Dificultad.infantil, child, -1);
-			}else if(type.equals("Familiar")) {
-				ReservaMgr.addReservaFam(email, date, lenght, track, Dificultad.familiar, child, adult, -1);
-			}else if(type.equals("Adultos")) {
-				ReservaMgr.addReservaAdult(email, date, lenght, track, Dificultad.adultos, adult, -1);
-			}
-		}else { // bono == true
+		
+		if(bono == true) { // bono == true
+			ReservaDAO.crearBono(email, type.toLowerCase());
 			idBono = ReservaDAO.obtenerBono(email, type.toLowerCase());
 			if(type.equals("Infantil")) {
 				ReservaMgr.addReservaChild(email, date, lenght, track, Dificultad.infantil, child, -1);

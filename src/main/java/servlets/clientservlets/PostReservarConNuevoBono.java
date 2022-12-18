@@ -16,16 +16,16 @@ import data.common.SystemManager;
 import data.dao.ReservaDAO;
 
 /**
- * Servlet implementation class PostReservaIndividual
+ * Servlet implementation class PostReservarConNuevoBono
  */
-@WebServlet("/PostReservaIndividual")
-public class PostReservaIndividual extends HttpServlet {
+@WebServlet("/PostReservarConNuevoBono")
+public class PostReservarConNuevoBono extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostReservaIndividual() {
+    public PostReservarConNuevoBono() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class PostReservaIndividual extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("Email");
-		String type = request.getParameter("Tipo");
+		String type = request.getParameter("Tipo").toLowerCase();
 		Timestamp date = SystemManager.StringToDateSQL2(request.getParameter("Date") + " " + request.getParameter("Time") + ":00");
 		String track = request.getParameter("Nombre");
 		int lenght = Integer.parseInt(request.getParameter("Duracion"));
@@ -56,28 +56,31 @@ public class PostReservaIndividual extends HttpServlet {
 		if(request.getParameter("Adult") != null) { adult = Integer.parseInt(request.getParameter("Adult")); }
 		
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();		
+		PrintWriter out = response.getWriter();
 		
-		if(bono == false) {
-			if(type.equals("Infantil")) {
-				ReservaMgr.addReservaChild(email, date, lenght, track, Dificultad.infantil, child, -1);
-			}else if(type.equals("Familiar")) {
-				ReservaMgr.addReservaFam(email, date, lenght, track, Dificultad.familiar, child, adult, -1);
-			}else if(type.equals("Adultos")) {
-				ReservaMgr.addReservaAdult(email, date, lenght, track, Dificultad.adultos, adult, -1);
-			}
-		}else { // bono == true
-			idBono = ReservaDAO.obtenerBono(email, type.toLowerCase());
-			if(type.equals("Infantil")) {
-				ReservaMgr.addReservaChild(email, date, lenght, track, Dificultad.infantil, child, -1);
-			}else if(type.equals("Familiar")) {
-				ReservaMgr.addReservaFam(email, date, lenght, track, Dificultad.familiar, child, adult, -1);
-			}else if(type.equals("Adultos")) {
-				ReservaMgr.addReservaAdult(email, date, lenght, track, Dificultad.adultos, adult, -1);
+		out.println("Email -> <" + email + ">\n");
+		out.println("Tipo -> <" + type + ">\n");
+		out.println("Date -> " + date + "\n");
+		out.println("Pista -> " + track + "\n");
+		out.println("Duracion -> " + lenght + "\n");
+		out.println("Bono -> " + bono + "\n");
+		
+		
+		if(bono == true) { // bono == true
+			out.println("\tControl");
+			ReservaDAO.crearBono(email, type);
+			idBono = ReservaDAO.obtenerBono(email, type);
+			out.println("\tIdBono -> " + String.valueOf(idBono)  + "\n");
+			if(type.equals("infantil")) {
+				ReservaMgr.addReservaChild(email, date, lenght, track, Dificultad.infantil, child, idBono);
+			}else if(type.equals("iamiliar")) {
+				ReservaMgr.addReservaFam(email, date, lenght, track, Dificultad.familiar, child, adult, idBono);
+			}else if(type.equals("adultos")) {
+				ReservaMgr.addReservaAdult(email, date, lenght, track, Dificultad.adultos, adult, idBono);
 			}
 		}
 		
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		//request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 }
